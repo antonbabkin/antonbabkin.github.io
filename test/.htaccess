@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^(.*)$ https://dl.dropboxusercontent.com/u/579580/$1 [L,QSA]
