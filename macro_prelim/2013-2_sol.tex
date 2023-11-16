@@ -1,0 +1,170 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{etoolbox}
+\usepackage[margin=1.5in]{geometry}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{Macro prelim solutions - August 2013}
+\author{Anton Babkin}
+
+\begin{document}
+
+{\Large Macro prelim solutions - August 2013\footnote{By Anton
+    Babkin. This version: \today.}}
+
+\textit{Disclaimer: These are unofficial solutions, they might have
+  errors and be incomplete. Your comments and corrections are welcome.}
+
+\section*{Question 1.A.}
+
+\textit{I am getting the opposite result in this problem: risk-free
+  interest rate rises over time.}
+
+\begin{enumerate}[(a)]
+\item Recursive formulation of agent's problem:
+  \begin{gather*}
+    V(a_t,A_t,b_t)=\max \log(c_t) + \beta\E_t V(a_{t+1},A_{t+1},b_{t+1})\\
+    \text{s.t. } c_t+p_ta_{t+1}+P_tA_{t+1}+q_tb_{t+1}=(p_t+d_t)a_t+(P_t+D_t)A_t+b_t
+  \end{gather*}
+  where asset $a_t$ has price $p_t$ and pays stochastic dividend
+  $d_t$, asset $A_t$ has price $P_t$ and pays constant dividend
+  $D_t=d_0$, and $b_t$ is a risk-free bond with price $q_t$.
+
+  Recursive competitive equilibrium is sequence of quantities
+  $c_t,a_t,A_t,b_t$ and prices $p_t,P_t,q_t$ such that:
+  \begin{itemize}
+  \item $c_t,a_t,A_t,b_t$ solve agent's problem taking prices as given,
+  \item markets clear: $a_t=1$, $A_t=1$, $b_t=0$ and $c_t=d_t+D_t$.
+  \end{itemize}
+
+  \textit{It is not necessary to introduce risk-free bond into the
+    model, risk-free rate can be computed without it using pricing
+    kernel.}
+
+
+\item Standard asset pricing Euler equations:
+  \begin{gather*}
+    p_t=\beta\E_t\frac{c_t}{c_{t+1}}(p_{t+1}+d_{t+1})\\
+    P_t=\beta\E_t\frac{c_t}{c_{t+1}}(P_{t+1}+D_{t+1})\\
+    q_t=\beta\E_t\frac{c_t}{c_{t+1}}\\
+  \end{gather*}
+
+  With market clearing conditions, risk-free bond price is
+  \begin{equation*}
+    q_t=\beta\E_t\frac{d_t+D_t}{d_{t+1}+D_{t+1}}=\beta\E_t\frac{d_t+d_0}{d_{t+1}+d_0}\\
+  \end{equation*}
+
+  Using law of motion for $d_t$,
+  $E_t(f(d_{t+1}))=\pi f(d_t(1+\delta))+(1-\pi)f(d_t)$. Then
+  \begin{align*}
+    q_t&=\beta[\pi\frac{d_t+d_0}{d_{t}(1+\delta)+d_0}+(1-\pi)\frac{d_t+d_0}{d_{t}+d_0}]\\
+       &=\beta[\pi\frac{d_t+d_0}{d_{t}(1+\delta)+d_0}+(1-\pi)]\\
+       &=\beta[\pi\frac{d_t(1+\delta)+d_0-d_t\delta}{d_{t}(1+\delta)+d_0}+(1-\pi)]\\
+       &=\beta[1-\pi\frac{d_t\delta}{d_{t}(1+\delta)+d_0}]\\
+  \end{align*}
+
+  In expectation as of $t=0$, future change in price is
+  \begin{align*}
+    \E_0[q_{t+1}-q_t]&=\E_0\left[\E_t[q_{t+1}-q_t]\right]\\
+                     &=\E_0\left[
+                       \E_t\left(
+                       \beta[1-\pi\frac{d_{t+1}\delta}{d_{t+1}(1+\delta)+d_0}]
+                       \right)-
+                       \beta[1-\pi\frac{d_t\delta}{d_{t}(1+\delta)+d_0}]
+                       \right]\\
+                     &=\E_0\left[\beta\pi\left(\frac{d_t\delta}{d_{t}(1+\delta)+d_0}-\E_t[\frac{d_{t+1}\delta}{d_{t+1}(1+\delta)+d_0}]\right)\right]\\
+                     &=\E_0\left[\beta\pi\left(\frac{d_t\delta}{d_{t}(1+\delta)+d_0}-\pi\frac{d_{t}\delta(1+\delta)}{d_{t}(1+\delta)^2+d_0}-(1-\pi)\frac{d_{t}\delta}{d_{t}(1+\delta)+d_0}\right)\right]\\
+                     &=\E_0\left[\beta\pi^2\left(\frac{d_{t}\delta}{d_{t}(1+\delta)+d_0}-\frac{d_{t}\delta(1+\delta)}{d_{t}(1+\delta)^2+d_0}\right)\right]\\
+                     &=\E_0\left[\beta\pi^2\left(\frac{d_{t}\delta(1+\delta)}{d_{t}(1+\delta)^2+d_0(1+\delta)}-\frac{d_{t}\delta(1+\delta)}{d_{t}(1+\delta)^2+d_0}\right)\right]
+  \end{align*}
+  
+  \begin{align*}
+  d_{t}(1+\delta)^2+d_0(1+\delta) &> d_{t}(1+\delta)^2+d_0\\
+  \frac{d_{t}\delta(1+\delta)}{d_{t}(1+\delta)^2+d_0(1+\delta)}&<\frac{d_{t}\delta(1+\delta)}{d_{t}(1+\delta)^2+d_0}\\
+  \E_0[q_{t+1}-q_t]&<0
+  \end{align*}
+
+  $\E_0q_{t+1}<\E_0q_t$, risk-free bond price $q_t$ falls over time in
+  expectation, so risk-free interest rate increases over
+  time. Intuitively, asset $a$ is becoming more and more valuable over
+  time as it pays increasing dividend, so return on an alternative
+  asset such as risk-free bond $b$ must be also increasing so that
+  it's market clears in equilibrium.
+
+\item Using the law of iterated expectations,
+  \begin{align*}
+    \E_0d_t&=\E_0\E_{t-1}d_t\\
+           &=\E_0d_{t-1}(\pi(1+\delta)+(1-\pi))\\
+           &=\E_0\E_{t-2}d_{t-1}(1+\pi\delta)\\
+           &=\E_0d_{t-2}(1+\pi\delta)^2\\
+           &...\\
+           &=d_0(1+\pi\delta)^t
+  \end{align*}
+
+  So $\lim_{t\to\infty}\E_0d_t=\infty$, in expectation dividend grows
+  without bound.
+
+  Then the limit of the bond price is:
+  \begin{align*}
+    \lim_{t\to\infty}\E_0q_t&=\lim_{t\to\infty}\E_0\beta[1-\pi\frac{d_t\delta}{d_{t}(1+\delta)+d_0}]\\
+                            &=\lim_{t\to\infty}\E_0\beta[1-\pi\frac{\delta}{(1+\delta)+d_0/d_{t}}]\\
+                            &=\beta[1-\pi\frac{\delta}{1+\delta}]<\beta
+  \end{align*}
+
+  So in the limit the risk-free rate is $>1/\beta$.
+
+
+\item Iterating Euler equation forward and assuming no-bubble equilibrium, obtain
+
+  \begin{align*}
+    \frac{p_t}{d_t}&=\E_t\sum_{j=1}^\infty\beta^j\frac{d_t+d_0}{d_{t+j}+d_0}\frac{d_{t+j}}{d_t}\\
+                   &=\frac{d_t+d_0}{d_t}\E_t\sum_{j=1}^\infty\beta^j\frac{d_{t+j}}{d_{t+j}+d_0}
+  \end{align*}
+
+  As $t$ increases, $\frac{d_t+d_0}{d_t}$ decreases at a decelerating
+  rate. So the term $\frac{d_t+d_0}{d_t}$ decreases faster than each
+  of the $\frac{d_{t+j}}{d_{t+j}+d_0}$ terms is increasing. Then price
+  to dividend ratio is declining. In the limit
+  $d_{t+j}\approx d_{t+j}+d_0$, so
+  \begin{equation*}
+    \lim_{t\to\infty}\E_0\frac{p_t}{d_t}=\sum_{j=1}^\infty\beta^j=\frac{\beta}{1-\beta}
+  \end{equation*}
+
+\end{enumerate}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

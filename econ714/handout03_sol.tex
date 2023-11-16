@@ -1,0 +1,236 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{etoolbox}
+%\usepackage[margin=1in]{geometry}
+
+\newtoggle{sol}
+\settoggle{sol}{true} % set false to hide solutions, true to display
+\newcommand{\sol}[1]{\iftoggle{sol}{{\color{blue} #1 }}{}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{Econ 714: Handout 3 \iftoggle{sol}{- Solution}{}}
+\author{Anton Babkin}
+
+\begin{document}
+
+\iftoggle{sol}{}{
+  \pagenumbering{gobble}
+}
+
+{\Large Econ 714: Handout 3 \sol{- Solution}\footnote{By Anton Babkin. This version: \today.}}
+
+\section{Term structure of interest rates}
+
+Consider the following environment. The economy has a Lucas tree that
+issues an uncertain dividend $s_{t}$ each period, which follows the
+Markov transition function $Q(s,s')$. Define the risk-free (gross)
+interest rate between periods $t$ and $t+j$ as $R_{jt}$ (corresponding
+price $q_{jt}=1/R_{jt}$), measured in units of the $t+j$ consumption
+good per the time $t$ consumption good. Assume that all bonds are
+zero-coupon. Let $b_{jt}$ denote the holdings of the bond with
+maturity $j$ issued at time $t$, and let $a_{t}$ denote holdings of the
+tree. Suppose the representative agent has time-additive utility such
+that $u'>0,u''<0,$ and $\lim_{c\to0}u'(c)=\infty$.
+\begin{enumerate}
+\item Assume that the only bonds in the market are of 1- and 2-period maturity,
+and each is in zero net supply. Write down the agent's Bellman equation
+and the relevant budget constraint and market clearing conditions
+(i.e. define an equilibrium).
+\item Solve for the prices of all three assets. Does the relationship 
+\[
+q_{2t}=q_{1t}\mathbb{E}_{t}(q_{1t+1})
+\]
+hold? Why or why not? If not, what changes can we make to the model
+so that it does?
+\item The \textbf{term structure} is the collection of yields to maturity
+across dates of maturity for all bonds within a certain class. The
+\textbf{yield to maturity }of a bond is the return earned by an investor
+who purchases the bond today and holds it to maturity, collecting
+all coupon payments along the way and the return of principal at the
+end. Assume that the dividend process is i.i.d. to ease the computation.
+Compute the yields to maturity and therefore term structure for the
+risk-free assets in this economy. Under what conditions is the yield
+curve increasing? 
+\item BONUS (an easy one): Generalize your answer to part 3 to the case
+when the economy has bonds with maturities 1,2,...$j$.\end{enumerate}
+
+
+\sol{
+
+This question is adapted from Section 13.8 of LS.
+
+\begin{enumerate}
+\item The budget constraint for the representative agent given this environment
+is
+\begin{equation}
+\label{eq:tsbud}
+c_{t}+p_{t}a_{t+1}+q_{1t}b_{1t}+q_{2t}b_{2t}\le(p_{t}+s_{t})a_{t}+b_{1,t-1}+q_{1t}b_{2,t-1}
+\end{equation}
+Notice that on the LHS $b_{1t}$ is indistinguishable from $b_{2,t-1}$,
+so we can ignore the latter. Similarly, on the RHS $b_{1,t-1}$ is the
+same as $b_{2,t-2}$.
+
+Assume that we have the initial conditions
+$b_{10}=b_{20}=0$. The LHS of \eqref{eq:tsbud} describes the expenditures of the
+agent, taking prices as given. The RHS represents period $t$
+wealth. Given this, the Bellman equation is
+\begin{align}
+\label{eq:tsbel}
+V(a_t,b_{1,t-1},b_{2,t-1};s_t)=\max_{a_{t+1},b_{1t},b_{2t}}\left\{u(c_t)+\beta\E[V(a_{t+1},b_{1t},b_{2t};s_{t+1})|s_t]\right\}\\
+\text{s. t. }c_{t}+p_{t}a_{t+1}+q_{1t}b_{1t}+q_{2t}b_{2t}=(p_{t}+s_{t})a_{t}+b_{1,t-1}+q_{1t}b_{2,t-1}\nonumber
+\end{align}
+subject to all the appropriate non-negativity constraints. The relevant
+market clearing conditions are $c_t=s_t$, $a_{t+1}=1$, $b_{1t}=b_{2t}=0$.
+
+
+\item We can use the usual procedure of taking FOCs and envelope conditions
+on the Bellman equation \eqref{eq:tsbel} and plugging in market clearing conditions
+to find that:
+\begin{eqnarray*}
+p_t & = & \E_t\left[\beta\frac{u'(s_{t+1})}{u'(s_t)}(p_{t+1}+s_{t+1})\right]\\
+1/R_{1t}=q_{1t} & = & \E_t\left[\beta\frac{u'(s_{t+1})}{u'(s_{t})}\right]\\
+1/R_{2t}=q_{2t} & = & \E_t\left[\beta\frac{u'(s_{t+1})}{u'(s_t)}q_{1,t+1}\right]=\E_t\left[\beta^{2}\frac{u'(s_{t+2})}{u'(s_t)}\right]
+\end{eqnarray*}
+
+The last part of this question asks us to evaluate whether a reasonable
+replication result holds. But as we will see, the combination of risk
+aversion and uncertainty in this model will actually make this equation
+not hold. In order to see this, we can compute:
+\begin{eqnarray*}
+q_{2t} & = & \mathbb{E}_{t}\left[\beta\frac{u'(s_{t+1})}{u'(s_{t})}q_{1,t+1}\right] \\
+ & = & \mathbb{E}_{t}\left[\beta\frac{u'(s_{t+1})}{u'(s_{t})}\right]\mathbb{E}_{t}\left[q_{1,t+1}\right]+Cov_{t}\left(\beta\frac{u'(s_{t+1})}{u'(s_{t})},q_{1,t+1}\right) \\
+ & = & q_{1t}\mathbb{E}_{t}\left[q_{1,t+1}\right]+Cov_{t}\left(\beta\frac{u'(s_{t+1})}{u'(s_{t})},q_{1,t+1}\right)\ne q_{1t}\mathbb{E}_{t}\left[q_{1,t+1}\right]\text{ in general. }
+\end{eqnarray*}
+Note that under risk neutrality, i.e. linear utility, marginal utility
+is constant and so the covariance term goes away and the originally
+proposed result holds.
+
+
+\item For a zero-coupon bond with purchase price $1/R_{jt}$, the yield
+to maturity is simply $YTM_{jt}=(R_{jt})^{1/j}$. Recalling that we
+are now assuming that the dividends are i.i.d. to ease the exposition,
+we can write the two yields as:
+\begin{eqnarray*}
+YTM_{1t} & = & \frac{1}{\beta}\left(\frac{u'(s_{t})}{\mathbb{E}(u'(s))}\right)\\
+YTM_{2t} & = & \frac{1}{\beta}\left(\frac{u'(s_{t})}{\mathbb{E}(u'(s))}\right)^{1/2}
+\end{eqnarray*}
+Therefore, it follows that
+\begin{equation*}
+\frac{YTM_{2t}}{YTM_{1t}}=\left(\frac{\mathbb{E}(u'(s))}{u'(s_{t})}\right)^{1/2}.
+\end{equation*}
+Then, in order for the yield curve to be increasing we must have that
+$\mathbb{E}(u'(s))>u'(s_{t})$. When consumption is high, marginal
+utility is low, while expected future consumption is lower. So
+everybody wants to save more in order to smooth their
+consumption. Increased demand for bonds increases their price and
+reduces interest rates, return to savings falls on both 1 and 2 year
+bonds. But next period consumption is expected to revert to it's mean,
+and interest rates are expected to be higher. Saving in 1 year bonds
+can be reinvested then for a higher return, so demand for 1 year bonds
+today is higher than for 2 year bonds, reducing their return more (in
+annualized terms, or YTM).
+
+
+\item Using the same approach that we used in parts 2 and 3, we can find
+that the $j$-period ahead risk-free rate is given by
+\begin{equation*}
+1/R_{jt}=\mathbb{E}_{t}\left[\beta^{j}\frac{u'(s_{t+j})}{u'(s_{t})}\right],
+\end{equation*}
+and so the corresponding yield to maturity is given by
+\begin{equation*}
+YTM_{jt}=\frac{1}{\beta}\left[\frac{u'(s_{t})}{E(u'(s))}\right]^{1/j}
+\end{equation*}
+By iterating forward on the above expression, we can solve for the
+relationships between yields of all maturities. Then, in general,
+for $k>j$, 
+\begin{equation*}
+\frac{YTM_{kt}}{YTM_{jt}}=\left(\frac{\mathbb{E}(u'(s))}{u'(s_{t})}\right)^{(k-j)/kj},
+\end{equation*}
+and so the criteria for an increasing yield curve are the same as
+above.
+
+\end{enumerate}
+
+}
+
+
+\newpage
+
+\section[]{Burrowed are?\footnote{Spring 2016 problem set}}
+
+An economy consists of two types of consumens indexed by
+$i=1,2$. There is one nonstorable consumption good. Let
+$(e_t^i,c_t^i)$ be the endowment, consumption pair for consumer $i$ in
+period $t$. Both consumers have preferences ordered by
+
+\begin{equation*}
+  U^i=\E\sum_{t=0}^\infty\beta^t\log(c_t^i)
+\end{equation*}
+
+The endowment streams of the two consumers are governed by two
+independent 2-state Markov chains $s_t\in\{0,1\}$ with transition
+matrix $P_s$ and $a_t\in\{0,1\}$ with transition matrix $P_a$, where
+$P_{s,12}=Pr\{s_{t+1}=1|s_t=0\}$ and so on. Suppose that each chain is
+stationary and that the initial states $(s_0,a_0)$ are drawn from the
+stationary distribution, so that $Pr\{s_0=0\}=\overline{\pi}_s$ and
+$Pr\{a_0=0\}=\overline{\pi}_a$. Consumer 1 has endowment
+$e_t^1=a_t+s_t$, while consumer 2 has endowment $e_t^2=a_t+1-s_t$.
+
+\begin{enumerate}[(a)]
+\item Write out explicitly the preferences $U^i$ of a consumer in
+  terms of the history of the states and their associated
+  probabilities.
+\item Define a competitive equilibrium for this economy.
+\item Characterize the competitive equilibrium for this economy,
+  calculating the prices of all Arrow-Debreu securities. How does the
+  allocation vary across the $(s_t,a_t)$ states? Across time? Across
+  consumers?
+\item Now consider an economy with sequential trading in Arrow
+  securities, one-period ahread claims to contingent consumption. How
+  many Arrow securities are there? Compute their prices in the special
+  case $\beta=0.95$, $P_{s,11}=0.9$, $P_{s,22}=0.8$, $P_{a,11}=0.8$,
+  $P_{a,22}=0.7$.
+\item Using these same parameters, in each state what is the price of
+  a one-period ahead riskless claim to one unit of consumption?
+
+\end{enumerate}
+
+\sol{
+
+  You can check details in the solution of Problem set 1, but here is
+  a general overview of the algoritm.
+
+  Solution relies on a few fundamental results, proven in LS Chapter 8.
+  \begin{itemize}
+  \item For a particular choice of prices date-0 trade (Arrow-Debreu)
+    market equilibrium allocation is the same as in secquential
+    (Arrow) market equilibrium.
+  \item AD equilibrium is Pareto efficient.
+  \item Solution to a social planner's problem is Pareto efficient.
+  \end{itemize}
+
+  \emph{Negishi algorithm} uses these results to solve for competitive
+  equilibrium:
+  \begin{enumerate}
+  \item Solve social planner's problem with a set of Pareto
+    weights. Solution is an Pareto efficient consumption sequence that
+    depends on chosen weights.
+  \item We know that \emph{one} of all possible Pareto efficient
+    allocations coincides with AD market equilibrium. To select such
+    allocation, we need to pick particular Pareto weights which will
+    satisfy a feature of markets, budget constraint, and be consistent
+    with household optimization. In addition, one price can be
+    normalized to 1 (typically, price at time 0 and state 0. Once we
+    found such weights, we can compute AD equilibrium.
+  \item Sequential markets equilibrium has the same allocation as AD
+    equilibrium and prices $q_{t+1}^t=q_{t+1}^0 / q_t^0$.
+  \end{enumerate}
+
+}
+
+\end{document}

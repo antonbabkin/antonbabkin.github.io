@@ -1,0 +1,250 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{etoolbox}
+\usepackage[margin=1in]{geometry}
+
+\newtoggle{sol}
+\settoggle{sol}{true} % set false to hide solutions, true to display
+\newcommand{\sol}[1]{\iftoggle{sol}{{\color{blue} #1 }}{}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{Econ 714: Handout 2 \iftoggle{sol}{- Solution}{}}
+\author{Anton Babkin}
+
+\begin{document}
+
+\iftoggle{sol}{}{
+  \pagenumbering{gobble}
+}
+
+{\Large Econ 714: Handout 2 \sol{- Solution}\footnote{By Anton Babkin. This version: \today.}}
+
+\section[]{McCall with savings\footnote{Spring 2014 midterm}}
+
+Recall the McCall search model: when a worker is unemployed, he
+receives a constant benefit $z$, searches for a job, and receives an
+offer $w$ drawn from a distribution $F(w)$. Wage offers are
+i.i.d. over time, and if a worker accepts he works forever at that
+wage $w$. Now suppose that workers (both employed and unemployed) are
+able to borrow or save in an asset $a$ yielding fixed gross return
+$R$. The flow budget constraint is thus:
+\begin{equation*}
+  c_t + a_{t+1} = Ra_t + y_t
+\end{equation*}
+where here $y_t$ is the worker’s income, which is either $z$ if he is
+unemployed or $w$ if he is employed. Assume there is a borrowing
+constraint $a_t \ge \underline{a}$ which never binds. Workers seek to maximize:
+\begin{equation*}
+  \E_0\sum_{t=0}^\infty\beta^tu(c_t)
+\end{equation*}
+where $0 < \beta < 1$ and $u$ is bounded and satisfies $u'>0$, $u''<0$.
+
+\begin{enumerate}
+\item Write down the Bellman equations characterizing the values of
+  employed and unemployed workers.
+\item Characterize an unemployed worker’s decisions for responding to
+  job offers, consumption, and savings as sharply as you can.
+\end{enumerate}
+
+
+\sol {
+
+  Check Kyle Dempsey's solution of this problem for a great and
+  detailed explanation (duplicated on my web-page). As you can see
+  there, it is enough to derive an Euler equation.
+
+  The only part I'm not quite sure about is determination of
+  reservation wage. By timing convention, accept/reject decision is
+  made after $a'$ has been choosen, $w_R$ should be a function of
+  $a'$. This in turn should be taken into account when taking FOC of
+  value function of the unemployed with respect to $a'$. One should be
+  careful and use Leibniz's ruls since $a'$ appears both in the
+  integrand $U(a'),W(w,a')$ and limits $w_R(a')$ if the integral.
+
+}
+
+
+\section[]{Lucas tree\footnote{August 2012 macro prelim}}
+
+Suppose that a representative agent has preferences:
+\begin{equation*}
+  \E_0\sum_{t=0}^\infty\beta^tu(c_t)
+\end{equation*}
+over the single non-storable consumption good (“fruit”), where
+$\gamma > 0$. Her endowment of the good is governed by a Markov
+process with transition function $F(x,x')$.
+\begin{enumerate}
+\item Define a recursive competitive equilibrium with a market in
+  claims to the endowment process (“trees”).
+
+\sol{
+  Recursive problem of the agent:
+  \begin{equation}
+    \label{eq:prbl}
+    \begin{aligned}
+      V(a,x)=&\max_{c,a'}\left(u(c)+\beta\E[V(a',x')|x]\right) \\
+      &\text{s.t. } c+pa'=(p+x)a
+    \end{aligned}
+  \end{equation}
+
+  where $p$ is the market price of a claim/asset $a$.
+
+  Recursive competitive equilibrium is:
+  \begin{itemize}
+  \item solution of the agent's problem \eqref{eq:prbl}:
+    \begin{itemize}
+    \item decision rules $c(a,x)$ and $a'(a,x)$,
+    \item value function $v(a,x)$;
+    \end{itemize}
+  \item prices $p(x)$,
+  \end{itemize}
+such that markets clear:
+\begin{itemize}
+\item $a'(a,x) = 1$ (assets)
+\item $c(a,x) = x$ (goods)
+\end{itemize}
+
+}
+
+\item When the consumer has logarithmic utility, $u(c) = log(c)$, what
+  is the equilibrium price/dividend ratio of a claim to the entire
+  consumption stream? How does it depend on the distribution of
+  consumption growth?
+
+\sol{
+
+  Start with characterising solution of the agent's problem with Euler
+  equation.
+
+  Substitute $c$ using budget constraint:
+  \begin{equation*}
+    V(a,x)=\max_{c,a'}\left(u((p+x)a-pa')+\beta\E[V(a',x')|x]\right)
+  \end{equation*}
+
+  \begin{align*}
+    \text{FOC}(a')&:  pu'(c)=\beta\E[V_1(a',x')|x] \\
+    \text{ENV}(a)&: V_1(a,x) = (p+x)u'(c) \\
+    \text{EE}&: pu'(c)=\E[\beta u'(c')(p'+x')|x]
+  \end{align*}
+
+Rewrite EE with time subscripts:
+\begin{equation*}
+  p_t = \E_t\beta\frac{u'(c_{t+1})}{u'(c_t)}(p_{t+1}+x_{t+1})
+\end{equation*}
+
+Substitute iteratively, using law of iterated expectations,
+$\E_t[E_{t+1}[x_{t+2}]]=E_t[x_{t+2}]$:
+
+\begin{align}
+  p_t & = \E_t[\sum_{s=1}^T\beta^s\frac{u'(c_{t+s})}{u'(c_t)}x_{t+s} + \beta^T\frac{u'(c_{t+T})}{u'(c_t)}p_{t+T}] \nonumber \\
+      & \to \E_t[\sum_{s=1}^\infty\beta^s\frac{u'(c_{t+s})}{u'(c_t)}x_{t+s}]\label{eq:p}
+\end{align}
+
+where
+$\lim_{T\to\infty}\E_t\beta^T\frac{u'(c_{t+T})}{u'(c_t)}p_{t+T} = 0$
+by transversality condition.
+
+Now use market clearing $c_t = x_t$ and log utility $u'(c)=1/c$ to obtain
+\begin{equation*}
+  p_t = \E_t[\sum_{s=1}^\infty\beta^sx_{t}] = x_t \sum_{s=1}^\infty\beta^s
+\end{equation*}
+
+So $\frac{p_t}{x_t} = \frac{\beta}{1-\beta}$, i.e. price to dividend
+ratio does not depend on any future information, including
+distribution function of dividends.
+
+
+}
+
+\item Suppose there is news at time $t$ that future consumption will be
+  higher. How will prices respond to this news? How does this depend
+  on the consumer’s preferences (which could be CRRA, not necessarily
+  log)? Interpret your results.
+
+\sol{
+
+  Statement about future consumption implies that there is a certain
+  future increase in dividend or it's distribution, since in
+  equilibrium $c=x$.
+  
+  CRRA utility is $u(c) = \frac{c^{1-\gamma}}{1-\gamma}$,
+  $u'(c)=c^{-\gamma}$.
+
+  With market clearing, equation~\eqref{eq:p} becomes
+  \begin{align*}
+    p_t & =\E_t[\sum_{s=1}^\infty\beta^s\frac{x_{t+s}^{-\gamma}}{x_t^{-\gamma}}x_{t+s}] \\
+        & =x_t^{\gamma}\E_t[\sum_{s=1}^\infty\beta^sx_{t+s}^{1-\gamma}]
+  \end{align*}
+
+  Current price response to future increase in $x$ depends on
+  $\gamma$. If $\gamma<1$, i.e. risk aversion is low, then price
+  increases. Otherwise, risk aversion dominates dividend growth and
+  price falls.
+
+}
+
+\item Suppose that the endowment process is characterized by lognormal
+  growth.  That is, $x_{t+l} = x_t \exp(\xi_{t+1})$, where
+  $\xi_t \sim N(\mu, \sigma^2)$ i.i.d. What is one-period risk free
+  interest rate?  How does it depend on the preference parameter
+  $\gamma$?  Interpret your results.
+
+\sol{
+
+  Price of an asset that pays $g(x_{t+1})$ in one period is given by:
+  \begin{equation*}
+    p^g_t = \E_t[\beta\frac{u'(x_{t+1})}{u'(x_t)}g(x_{t+1})]
+  \end{equation*}
+
+  Risk-free discount bond with price $q_t$ pays $g(x_{t+1})=1$. With
+  CRRA utility:
+  \begin{align*}
+    q_t & = \E_t[\beta\frac{x_{t+1}^{-\gamma}}{x_t^{-\gamma}}\times 1] \\
+        & = \E_t[\beta\frac{(x_{t}e^{\xi_{t+1}})^{-\gamma}}{x_t^{-\gamma}}] \\
+        & = \beta \E_t e^{-\gamma\xi_{t+1}} \\
+        & = \beta e^{-\gamma\mu +\gamma^2\sigma^2/2}
+  \end{align*}
+
+  Where the last equation is the expectation of log-normal
+  distribution.
+
+  So the gross risk-free interest rate is
+  \begin{equation*}
+    R = 1/q = \frac{1}{\beta} e^{\gamma\mu -\gamma^2\sigma^2/2}
+  \end{equation*}
+
+}
+
+
+
+\item Consider an option which is bough or sold in period t and
+  entitles the current owner to exercise the right to buy one “tree”
+  in period t+1 at the fixed price $\bar{p}$ specified at date
+  $t$. (The buyer may choose not to exercise this option.) Find a
+  formula for the price of this option in terms of the parameters
+  describing preferences and endowments.
+
+\sol{
+
+  Call option with strike price $\bar{p}$ pays
+  $g(x_{t+1})=\max\{p(x_{t+1})-\bar{p},0\}$.
+
+  So price of such option must be
+  \begin{equation*}
+    p^g_t = \E_t[\beta\frac{x_{t+1}^{-\gamma}}{x_t^{-\gamma}}\max\{p(x_{t+1})-\bar{p},0\}]
+  \end{equation*}
+
+  With a known distribution $F(x,x')$, it can be computed using
+  equation~\eqref{eq:p} for $p(x_{t+1})$.
+
+}
+
+
+\end{enumerate}
+
+\end{document}
+

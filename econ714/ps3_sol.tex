@@ -1,0 +1,314 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{enumerate}
+%\usepackage[margin=1in]{geometry}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{Econ 714: Problem Set 3 - Solution}
+\author{Anton Babkin}
+
+\begin{document}
+
+{\Large Econ 714: Problem Set 3 - Solution\footnote{By Anton Babkin. \today.}}
+
+\section[]{\footnote{For a more general case see ``Wedges and Taxes''
+    by Kocherlakota (2004, AER Papers and Proceedings), and ``Optimal
+    Indirect and Capital Taxation'' by Golosov et al. (2003, Review of
+    Economic Studies).}}
+\begin{enumerate}[(a)]
+\item Maximize expected utility subject to resource and incentive compatibility constraints:
+  \begin{gather*}
+    \max_{c_1(\theta),c_2(\theta),x(\theta)} \E\left[u(c_1) + \beta(u(c_2)-v(l))\right]\\
+    \text{s.t. } x=\theta l\\
+    \sum_{i}p_i( c_1(\theta_i) + c_2(\theta_i)) = y_1 + \sum_{i}p_ix(\theta_i)\\
+    \E\left[u(c_1(\theta_H)) + \beta(u(c_2(\theta_H))-v(x(\theta_H)/\theta_H))\right] \ge
+    \E\left[u(c_1(\theta_L)) + \beta(u(c_2(\theta_L))-v(x(\theta_L)/\theta_H))\right]\\
+    \E\left[u(c_1(\theta_L)) + \beta(u(c_2(\theta_L))-v(x(\theta_L)/\theta_L))\right] \ge
+    \E\left[u(c_1(\theta_H)) + \beta(u(c_2(\theta_H))-v(x(\theta_H)/\theta_L))\right]\\
+  \end{gather*}
+  where $p_i=1/2$ for $i=L,H$.
+
+\item We need to show that
+  $u'(c_1(\theta_i)) = \beta u'(c_2(\theta_i))$.
+
+  Suppose that it's not true and, without loss of generality,
+  $u'(c_1(\theta_i)) > \beta u'(c_2(\theta_i))$. Then it is possible
+  to find another allocation
+  $c_1'(\theta_i)>c_1(\theta_i),c_2'(\theta_i)<c_2(\theta_i)$ that
+  satisfies
+  $u(c_1'(\theta_i)) + \beta u(c_2'(\theta_i)) = u(c_1(\theta_i)) +
+  \beta u(c_2(\theta_i))$
+  and $c_1'(\theta_i) + c_2'(\theta_i)
+  <c_1(\theta_i)+c_2(\theta_i)$.
+  Since new allocation gives same utility, all incentive constraints
+  are satisfied. But there are now extra resources available, that can
+  be used to increase all types' utilities by the same amount,
+  increasing welfare.
+
+  Hence, conjecture $u'(c_1(\theta_i)) > \beta u'(c_2(\theta_i))$ is
+  wrong, and it must be that
+  $u'(c_1(\theta_i)) = \beta u'(c_2(\theta_i))$.
+
+\item We need to show that
+  $\frac{v'(x(\theta_H)/\theta_H)}{u'(c_2(\theta_H))} = \theta_H$.
+
+  Suppose it's not true and, without loss of generality,
+  $\frac{v'(x(\theta_H)/\theta_H)}{u'(c_2(\theta_H))} > \theta_H$.
+  Consider another allocation $x'(\theta_H)=x(\theta_H)-\Delta_x$,
+  $c_2'(\theta_H)=c_2(\theta_H)-\Delta_c$. Choose $\Delta_x$ and
+  $\Delta_c$ so that
+  $u(c_2'(\theta_H))-v(x'(\theta_H)/\theta_H)=u(c_2(\theta_H))-v(x(\theta_H)/\theta_H)$. For
+  that to hold, we need
+  $$u'(c_2(\theta_H))\Delta_c=v'(x(\theta_H)/\theta_H)\Delta_x/\theta_H$$
+  or
+  $$\frac{\Delta_c}{\Delta_x} = \frac{v'(x(\theta_H)/\theta_H)}{\theta_Hu'(c_2(\theta_H))}>1$$
+  The last inequality follows from out conjecture. So
+  $\Delta_c>\Delta_x$, meaning that resource constraint can be relaxed
+  again, allocation is not optimal, hence conjecture is wrong.
+
+  Notice that in this proof reduction in $x(\theta_H)$ increases RHS
+  of the incentive constraint for the $\theta_L$ type. But as was
+  mentioned in class, this constraint is not binding, hence we can
+  always choose a change sufficiently small not to violate it.
+
+\item Suppose that
+  $u'(c_1(\alpha)) = \beta \E_{\theta|\alpha}u'(c_2(\theta,\alpha))$
+  for a given $\alpha$, i.e. standard Euler equation holds and
+  intertemporal allocation is not distorted.
+
+  To simplify notation, omit $\alpha$ and denote
+  $c_2(\theta_i,\alpha)$ by $c_2^i$.
+
+  Consider an allocation $c_1' = c_1 + \Delta/u'(c_1)$,
+  $c_2'^i = c_2^i - \Delta/u'(c_2^i)$. For an infinitesimal $\Delta$,
+  this allocation also satisfies the above Euler equation, i.e. it is
+  optimal. Also note that
+  $u(c_1') + \beta\E u(c_2'^i) = u(c_1) + \beta \E u(c_2^i))$, so the
+  new allocation satisfies all incentive contraints and does not
+  change value of the welfare function.
+
+  By Jensen's inequality
+  $$\frac{1}{u'(c_1)}=\frac{1}{\E u'(c_2^i)} < \E \frac{1}{u'(c_2^i)}=\sum_i p_i\frac{1}{u'(c_2^i)}$$
+
+  Then
+  $$c_1'-c_1 = \frac{\Delta}{u'(c_1)} < \sum_i p_i\frac{\Delta}{u'(c_2^i)}=\sum_ip_i(c_2^i-c_2'^i)$$
+  Or
+  $$c_1'+\sum_ip_ic_2'^i < c_1+\sum_i p_i c_2^i$$
+
+  Again, new allocation consumes less resources, meaning that welfare
+  can be increased, and original allocation can not be optimal. Hence
+  our conjecture is wrong and
+  $u'(c_1(\alpha)) \ne \beta
+  \E_{\theta|\alpha}u'(c_2(\theta,\alpha))$,
+  i.e. intertemporal allocation must be distorted.
+
+\end{enumerate}
+
+
+
+\section{}
+
+Note: This solution uses the following corrections/clarifications:
+\begin{itemize}
+\item $E[\epsilon_{t+1}|x_t]=0$,
+\item  $g_{t+1}\equiv M_{t+1}/M_t$,
+\item $\frac{1}{g_t}\in[\frac{\underline{\epsilon}}{1-\rho},\frac{\bar{\epsilon}}{1-\rho}]$
+\item $R(x_{t-1})$ on the RHS of the HH budget constraint.
+\end{itemize}
+
+\begin{enumerate}[(a)]
+\item $R(x_1)>0$: nominal interest rate on bonds is positive. But
+  money yields zero nominal return, so money is dominated by bonds as
+  an asset. Hence, it is never optimal to hold excess money and CIA
+  constraint must bind.
+
+  Household problem:
+
+  \begin{gather*}
+    V(w_t)=\max_{c_t,s_t,B_t,M_t^d} u(c_t)+\beta\E[V(w_{t+1})|x_t]\\
+    \text{s.t. } w_t =
+    (d_{t-1}\frac{P_{t-1}}{P_t}+p(x_t))s_{t-1}+\frac{B_{t-1}R(x_{t-1})}{P_t}+\frac{M_{t-1}^d-P_{t-1}c_{t-1}}{P_t}\quad\forall t\\
+    c_t-\tau_t+p(x_t)s_t+\frac{B_t}{P_t}\le w_t\quad\forall t\\
+    P_tc_t\le M_t^d\quad\forall t\\
+    c_t\ge 0\quad\forall t\\
+  \end{gather*}
+
+  Solution to this functional equation exists and is unique if
+  $u(c_t)$ is bounded and continuous, domain of the vector of choice
+  variables is convex, and feasibility correspondence $\Gamma(w_t)$
+  implied by constraints is nonempty, compact-valued and continuous.
+
+  Value function $V(w_t)$ is strictly increasing if $u(c_t)$ is
+  strictly increasing in $w_t$, and $\Gamma(w_t)$ is monotone in
+  $w_t$.
+
+  $V(w_t)$ is differentiable if $u(c_t)$ is strictly concave in
+  $w_t,c_t,s_t,B_t,M_t^d$ and differentiable in $w_t$ in the interior
+  of the feasibility set, and $\Gamma(w_t)$ is convex.
+
+\item Recursive competitive equilibrium:
+  \begin{itemize}
+  \item Prices $P_t,p(x_t),R(x_{t})$,
+  \item Value function $V(w_t)$ and policy functions
+    $c_t(w_t),s_t(w_t),B_t(w_t),M_t^d(w_t)$ that solve household
+    problem for these prices and tax $\tau_t$,
+  \item Markets clear: $c_t=d_t$, $B_t=0$, $M_t^d=M_t$, $s_t=1$,
+  \item Government budget holds: $\tau_t=\frac{M_{t+1}-M_t}{P_t}$.
+  \end{itemize}
+
+\item $c_t\ge 0$ never binds if we assume $u'(0)=\infty$, and budget
+  constraint always binds if $u'(c_t)>0$.
+
+  CIA constraint $P_tc_t\le M_t^d$ always binds if we assume
+  $R(x_t)>1$, so we can substitute out $M_t^d$.
+
+  Rewrite household problem as:
+  \begin{gather*}
+    V(w_t)=\max_{c_t,s_t,B_t} u(c_t)+\beta\E[V(w_{t+1})|x_t]\\
+    \text{s.t. } w_t =
+    (d_{t-1}\frac{P_{t-1}}{P_t}+p(x_t))s_{t-1}+\frac{B_{t-1}R(x_{t-1})}{P_t}+\frac{M_{t-1}^d-P_{t-1}c_{t-1}}{P_t}\\
+    c_t=w_t+\tau_t-p(x_t)s_t-\frac{B_t}{P_t}
+  \end{gather*}
+
+  Plug in $c_t$ and $w_{t+1}$, and find optimality conditions:
+  \begin{align*}
+    FOC[s_t]&:u'(c_t)p(x_t)=\beta\E V'(w_{t+1})(d_{t}\frac{P_{t}}{P_{t+1}}+p(x_{t+1}))\\
+    FOC[B_t]&:\frac{u'(c_t)}{P_t}=\beta\E V'(w_{t+1})\frac{R(x_{t})}{P_{t+1}}\\
+    ENV[w_t]&:V'(w_t)=u'(c_t)
+  \end{align*}
+
+  These imply two Euler equations that can be used to price bonds and
+  Lucas tree:
+
+  \begin{gather}
+    u'(c_t)p(x_t)=\beta\E u'(c_{t+1})(d_{t}\frac{P_{t}}{P_{t+1}}+p(x_{t+1}))\label{eq:ees}\tag{$EE_s$}\\
+    \frac{u'(c_t)}{P_t}=\beta\E u'(c_{t+1})\frac{R(x_{t})}{P_{t+1}}\label{eq:eeb}\tag{$EE_B$}
+  \end{gather}
+
+\item We will guess and verify that $R(x_t)>1$.
+
+  As was discussed above, under this guess CIA constraint binds. Use
+  $u'(c_t)=1/c_t$, $c_t=d_t$ and $P_tc_t=M_t$ in
+  equation~\eqref{eq:eeb}:\
+  \begin{align*}
+    \frac{1}{c_tP_t}&=\beta\E\frac{R(x_t)}{c_{t+1}P_{t+1}}\\
+    \frac{1}{R(x_t)}&=\beta\E\frac{c_tP_t}{c_{t+1}P_{t+1}}\\
+                    &=\beta\E\frac{M_t}{M_{t+1}}\\
+                    &=\beta\E[\rho\frac{1}{g_t}+\epsilon_{t+1}]\\
+                    &=\beta\frac{\rho}{g_t}\\
+    R(x_t)&=g_t\frac{1}{\beta\rho}
+  \end{align*}
+
+  Under assumptions on the stochastic process for $g_t$,
+  $\frac{1}{g_t}\le\frac{\bar{\epsilon}}{1-\rho}<\frac{1}{\beta\rho}$,
+  or $g_t>\beta\rho$. It follows that $R(x_t)>1$, guess verified.
+
+\item Recursively substitute equation~\eqref{eq:ees}:
+  \begin{align*}
+    \frac{p(x_t)}{c_t}&=\beta\E\frac{d_tP_t}{c_{t+1}P_{t+1}} + \beta\E\frac{p(x_{t+1})}{c_{t+1}}\\
+    p(x_t)&=\beta\E d_t\frac{c_tP_t}{c_{t+1}P_{t+1}} + \beta\E\frac{c_t}{c_{t+1}}p(x_{t+1})\\
+                      &=\beta\E d_t\frac{M_t}{M_{t+1}}+\beta^2\E d_{t+1}\frac{M_{t+1}}{M_{t+2}}\frac{c_t}{c_{t+1}}+\beta^2\E\frac{c_t}{c_{t+2}}p_{t+2}\\
+                      &=...\\
+                      &=d_t\sum_{i=1}^\infty\beta^i\E\frac{M_{t+i-1}}{M_{t+i}}\\
+                      &=d_t\sum_{i=1}^\infty\beta^i\rho^i\frac{1}{g_t}\\
+                      &=d_t\frac{\beta\rho}{1-\beta\rho}\frac{M_{t-1}}{M_t}
+  \end{align*}
+
+\item From CIA constraints:
+  \begin{equation*}
+    \frac{P_{t+1}}{P_t}=\frac{M_{t+1}}{M_t}\frac{d_{t+1}}{d_t}
+  \end{equation*}
+  And 
+  \begin{equation*}
+    p(x_t)=d_t\frac{\beta\rho}{1-\beta\rho}\frac{M_{t-1}}{M_t}
+  \end{equation*}
+  Clearly, for a given $\rho$ increase in money growth rate
+  $\frac{M_{t+1}}{M_t}$ increases inflation and decreases price of
+  Lucas trees.
+
+
+\end{enumerate}
+
+
+\section[]{\footnote{June 2013 Macro Prelim Exam. Solution by Kyle Dempsey}}
+
+
+\subsubsection*{a. HJB equations}
+
+The value functions of agents who own a house, $V_{1}$, and those
+who don't, $V_{0}$, are given by
+\begin{eqnarray}
+rV_{1} & = & u+\alpha(1-H)\pi_{0}\pi_{1}[p+V_{0}-V_{1}]\\
+rV_{0} & = & \alpha H\pi_{0}\pi_{1}[-p+V_{1}-V_{0}].
+\end{eqnarray}
+Given these two value functions, we can subtract the second from the
+first in order to find the welfare gain, $\Delta\equiv V_{1}-V_{0}$:
+\begin{equation}
+\Delta=\frac{u+\alpha\pi_{0}\pi_{1}p}{r+\alpha\pi_{0}\pi_{1}}.\label{eq:delta}
+\end{equation}
+
+
+
+\subsubsection*{b. Optimal buying and selling strategies}
+
+In order to characterize each type of agents buying and selling strategies,
+we just compare the value of the action to its alternative, 0. For
+sellers, we have
+\begin{equation}
+\pi_{1}=\begin{cases}
+1 & \mbox{if }p-\Delta\ge0\\{}
+[0,1] & \mbox{if }p-\Delta=0\\
+0 & \mbox{if }p-\Delta\le0
+\end{cases}
+\end{equation}
+Given equation (\ref{eq:delta}), we can evaluate the conditioning
+expression:
+\begin{equation}
+p-\Delta=\frac{(r+\alpha\pi_{0}\pi_{1})p-u-\alpha\pi_{o}\pi_{1}p}{r+\alpha\pi_{0}\pi_{1}}=\frac{rp-u}{r+\alpha\pi_{0}\pi_{1}}=0\iff p=\frac{u}{r}\label{eq:surplus}
+\end{equation}
+The two equations above pin down the optimal selling strategy for
+agents with houses.
+
+Turning to the potential buyers of houses, we can proceed in a similar
+fashion:
+\begin{equation}
+\pi_{0}=\begin{cases}
+1 & \mbox{if }\Delta-p\ge0\\{}
+[0,1] & \mbox{if }\Delta-p=0\\
+0 & \mbox{if }\Delta-p\le0
+\end{cases}
+\end{equation}
+This equation, together with (\ref{eq:surplus}), determines the optimal
+strategy for agents without houses. Note that under the assumption
+that agents trade when they are indifferent, we can set $\pi_{0}=\pi_{1}=1$
+when $\Delta=p$.
+
+
+\subsubsection*{c. Equilibrium price and effects of housing supply}
+
+In order to determine the equilibrium house price $p$, we can consider
+equilibria in which houses trade, i.e. ones in which $\pi\equiv\pi_{0}\pi_{1}>0$.
+Given the equations for $\pi_{0}$ and $\pi_{1}$ in part b above,
+this is clearly only possible when $\Delta=p$, and so the equilibrium
+price is given by:
+\begin{equation}
+p=\frac{u}{r}
+\end{equation}
+
+
+Observe that the price of houses $p$ does not depend on housing supply
+$H$! This result makes sense because the price is determined in bilateral
+meetings, where regardless of the supply of houses in the overall
+economy one agent has a house and another does not. That is, \textbf{conditional
+on meeting}, the aggregate housing stock does not matter.
+
+
+
+
+
+\end{document}

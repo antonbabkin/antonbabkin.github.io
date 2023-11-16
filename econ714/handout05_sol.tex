@@ -1,0 +1,343 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{etoolbox}
+%\usepackage[margin=1.5in]{geometry}
+
+\newtoggle{sol}
+\settoggle{sol}{true} % set false to hide solutions, true to display
+\newcommand{\sol}[1]{\iftoggle{sol}{{\color{blue} #1 }}{}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{Econ 714: Handout 5 \iftoggle{sol}{- Solution}{}}
+\author{Anton Babkin}
+
+\begin{document}
+
+\iftoggle{sol}{}{
+  \pagenumbering{gobble}
+}
+
+{\Large Econ 714: Handout 5 \sol{- Solution}\footnote{By Anton Babkin. This version: \today.}}
+
+\section[]{Optimal taxation with private information\footnote{Adapted
+    from Kocherlakota (2004) Wedges and Taxes, AER Papers and
+    Proceedings.}}
+
+The model economy has two periods and a unit measure of agents. Each
+angent is endowed with $y_1$ units of the single consumption good in
+period 1. Consumption can be stored from one period to the next.
+
+In period 2, agents can exert effort to generate consumption. Measure $p_H$ of
+the agents are highly skilled, and one unit of their effort generates
+$\theta_H$ units of consumption. Measure $p_L$ are low-skilled. For
+them, one unit of effort generates $\theta_L$ units of consumption,
+where $\theta_L<\theta_H$. $p_H+p_L=1$.
+
+Agents' utility function is
+\begin{equation*}
+  U(c_1,c_2,l_2)=u(c_1)+\E[u(c_2)-v(l_2)]
+\end{equation*}
+where $c_t$ is consumption in period $t$ and $l_t$ is effort in period
+$t$. $u'>0,u''<0,v'>0,v''>0$.
+
+Timing is as follows. In period 1 agents choose consumption $c_1$ and
+savings $S$. In the beginning of period 2 idiosyncratic productivity
+$\theta$ is realized, with $Pr(\theta=\theta_H)=p_H$ and
+$Pr(\theta=\theta_L)=p_L$. Then the agent chooses $c_2$ and
+$l_2$. Productivity and effort are private invormation, but savings
+and output $y=\theta l$ are publicly observed.
+\begin{enumerate}
+\item Characterize first-best allocation. Explain why it is not
+  attainable under private information.
+
+\sol{
+
+  When all information is observable, social planner can choose
+  allocations conditional on agent's type. Denote by $x^i$ the choice
+  of variable $x$ by an agent of realized type $\theta_i$. Note that
+  ex ante utility is maximized, and second period variables are chosen
+  for every type before realization of uncertainty.
+
+  Social planner's problem:
+
+  \begin{gather*}
+    \max_{c_1,S,c_2^i,l_2^i} u(c_1)+\sum_ip_i(u(c_2^i)-v(l_2^i))\\
+    \text{s.t. } c_1+S=y_1\\
+    p_L c_2^L + p_H c_2^H = S + p_L\theta_Ll_2^L+p_H\theta_Hl_2^H
+  \end{gather*}
+
+  Attach Lagrange multiplier $\lambda$ to the combined resource constraint
+  (substitute out $S$)
+  $c_1+p_L c_2^L + p_H c_2^H = y_1 +
+  p_L\theta_Ll_2^L+p_H\theta_Hl_2^H$ and find FOCs:
+
+  \begin{gather*}
+    u'(c_1)=\lambda\\
+    p_iu'(c_2^i)=p_i\lambda\\
+    p_iv'(l_2^i)=p_i\theta_i\lambda
+  \end{gather*}
+
+  Summing the second equation over $i$ and equating to the first,
+  obtain Euler equation $u'(c_1)=\E(u'(c_2^i))$. Divide second by
+  $p_i$ and equate with the first to get $c_1=c_2^L=c_2^H$:
+  consumption is equalized across time and across states.
+
+  Use FOC in $l_2^i$ for $i=L,H$ and divide to get
+  $\frac{v'(l_2^L)}{v'(l_2^H)}=\frac{\theta_L}{\theta_H}$. Then
+  $\theta_L<\theta_H$ implies $l_2^L<l_2^H$: high productivity agents
+  put more effort even though their consumption level is the
+  same. Nevertheless, it is optimal ex ante, since agents don't know
+  what type they will be in period 2.
+
+  With private information, types are not observable to the planner,
+  and $\theta_H$ types will claim that they are $\theta_L$ to exert less
+  effort. So this first-best allocation is not compatible with
+  incentives under private information.
+
+}
+
+\item Formulate social planner's problem with private
+  information. Characterize socially optimal allocation: derive the
+  Euler equation and show that there is a wedge between intertemporal
+  MRS and MRT.
+
+\sol{
+
+  Under private information, allocations can only be conditional on
+  agent's reported types. To guarantee that types would be reported
+  truthfully, allocations should be such that agents have no
+  incentives to pretend that they are a different type. Such
+  allocations must satisfy \emph{incentive compatibility}
+  constraints. The full social planner's problem becomes:
+
+n  \begin{gather}
+    \max_{c_1,S,c_2^i,l_2^i} u(c_1)+\sum_ip_i(u(c_2^i)-v(l_2^i)) \nonumber \\
+    \text{s.t. } c_1+p_L c_2^L + p_H c_2^H = y_1 +
+    p_L\theta_Ll_2^L+p_H\theta_Hl_2^H \nonumber\\
+    u(c_2^H) - v(y_2^H/\theta_H) \ge u(c_2^L)-v(y_2^L/\theta_H) \tag{$IC_H$}\label{eq:ich}\\
+    u(c_2^L) - v(y_2^L/\theta_L) \ge u(c_2^H)-v(y_2^H/\theta_L) \tag{$IC_L$}\label{eq:icl}
+  \end{gather}
+
+
+  It can be proved (and we will just assume here) that \eqref{eq:icl} does
+  not bind in equilibrium.
+
+  \eqref{eq:ich} always binds in equilibrium. To prove, assume that
+  it's not. Then it is possible to increase $c_2^L$ and decrease
+  $c_2^H$ so that resource constraint is still
+  satisfied. \eqref{eq:icl} still holds, as LHS goes up and RHS goes
+  down. And since by assumption \eqref{eq:ich} holds with strict
+  inequality, we can always choose sufficiently small change in
+  $c_2^H,c_2^L$ so that \eqref{eq:ich} still holds. But such
+  alternative allocation is strictly better for aggregate welfare
+  because $c_2^L<c_2^H$ and $u'(c_2^L)>u'(c_2^H)$. So we reached a
+  contradiction, and hence \eqref{eq:ich} must be binding.
+
+  Rewrite the problem:
+
+  \begin{gather*}
+    \max_{c_1,S,c_2^i,l_2^i} u(c_1)+\sum_ip_i(u(c_2^i)-v(l_2^i)) \\
+    \text{s.t. } c_1+p_L c_2^L + p_H c_2^H = y_1 +
+    p_L\theta_Ll_2^L+p_H\theta_Hl_2^H \\
+    u(c_2^H) - v(y_2^H/\theta_H) = u(c_2^L)-v(y_2^L/\theta_H)\\
+  \end{gather*}
+
+  Attach multipliers $\lambda$ and $\mu$ to constraints. To derive
+  Euler equation, we only need FOCs on consumption.
+
+  \begin{gather*}
+    u'(c_1)=\lambda\\
+    p_Lu'(c_2^L)-p_L\lambda-\mu u'(c_2^L)=0\\
+    p_Hu'(c_2^H)-p_H\lambda+\mu u'(c_2^H)=0\\
+  \end{gather*}
+
+  Substitute $\lambda$ from the first equation and solve the last two
+  equations for $\mu$, obtain:
+  \begin{equation*}
+    \frac{p_Lu'(c_2^L)-p_Lu'(c_1)}{u'(c_2^L)}=\frac{p_Hu'(c_1)-p_Hu'(c_2^H)}{u'(c_2^H)}
+  \end{equation*}
+
+  Solve for $u'(c_1)$:
+  \begin{equation*}
+    u'(c_1)=\frac{1}{p_L\frac{1}{u'(c_2^L)}+p_H\frac{1}{u'(c_2^H)}}
+  \end{equation*}
+
+  This is the ``reciprocal'' Euler equation:
+  $u'(c_1)=\frac{1}{\E[1/u'(c_2^i]}$.
+
+  By Jensen's inequality, $\E[1/u'(c_2^i)]>1/\E u'(c_2^i)$, and from
+  Euler equation $u'(c_1)<\E u'(c_2^i)$. In this equilibrium
+  $MRS\ne MRT$, because there is an information friction.
+
+}
+
+
+\item Formulate agent's problem in a decentralized environment, where
+  government imposes a tax $\tau(S,y_2)$ in period 2. Assume that
+  $p_L=p_H=1/2$. Show that socially optimal marginal tax on savings
+  $\tau_S(S,y_2)$ depends on $y_2$ and $\tau_S(S,y_2^H)<\tau_S(S,y_2^L)$.
+
+\sol{
+
+  To decentralize the second-best allocation means to find an
+  appropriate tax schedule, such that socially optimal allocation will
+  be choosen by utility-maximizing agents.
+
+  Let the tax schedule be $\tau(S,y_2^i)$: it only depends on
+  observables (can't condition taxes on $\theta_i$ or $l_2^i$) and can
+  be a non-linear function.
+
+  Agent's problem is:
+
+  \begin{gather*}
+    \max_{c_1,S,c_2^i,l_2^i} u(c_1)+\sum_ip_i(u(c_2^i)-v(l_2^i))\\
+    \text{s.t. } c_1+S=y_1\\
+    c_2^i = S + y_2^i - \tau(S,y_2^i)\quad\forall i\\
+    y_2^i=\theta_il_2^i
+  \end{gather*}
+
+  Substitute budget constraints in the objective function:
+  \begin{equation*}
+        \max_{S,y_2^i} u(y_1-S)+\sum_ip_i[u(S + y_2^i - \tau(S,y_2^i))-v(y_2^i/\theta_i)]\\
+  \end{equation*}
+
+  FOC in $S$ gives Euler equation:
+  \begin{equation*}
+    u'(c_1)=\sum_ip_iu'(c_2^i)(1-\tau_S(S,y_2^i))
+  \end{equation*}
+
+  For agent's solution to coincide with social optimum, allocation
+  should also satisfy \eqref{eq:ich} with equality. In other words,
+  $\theta_H$-type agent should be indifferent between allocations
+  $(c_2^L,y_2^L)$ and $(c_2^H,y_2^H)$. If the agent chooses
+  $(c_2^L,y_2^L)$ for any $i$, his EE becomes
+  \begin{equation*}
+    u'(c_1)=\sum_ip_iu'(c_2^L)(1-\tau_S(S,y_2^L))=u'(c_2^L)(1-\tau_S(S,y_2^L))
+  \end{equation*}
+
+  If he chooses different allocations for $i=L,H$, then EE is
+  \begin{equation*}
+    u'(c_1)=p_Lu'(c_2^L)(1-\tau_S(S,y_2^L))+p_Hu'(c_2^H)(1-\tau_S(S,y_2^H))
+  \end{equation*}
+  
+  Eliminate $u'(c_1)$ and derive:
+  \begin{gather*}
+    u'(c_2^L)(1-\tau_S(S,y_2^L))=p_Lu'(c_2^L)(1-\tau_S(S,y_2^L))+p_Hu'(c_2^H)(1-\tau_S(S,y_2^H))\\
+    (1-p_L)u'(c_2^L)(1-\tau_S(S,y_2^L))=p_Hu'(c_2^H)(1-\tau_S(S,y_2^H))\\
+    \frac{1-\tau_S(S,y_2^L)}{1-\tau_S(S,y_2^H)}=\frac{p_H}{1-p_L}\frac{u'(c_2^H)}{u'(c_2^L)}
+  \end{gather*}  
+
+  With $p_i=1/2$ and $c_2^L<c_2^H$, RHS $<1$ and
+  $\tau_S(S,y_2^L)>\tau_S(S,y_2^H)$. This means that marginal tax on
+  savings (wealth) depends on the labor income in the second period
+  and is higher for low-productivity agents.
+
+}
+
+
+\end{enumerate}
+
+\newpage
+
+\section[]{Cash-in-advance\footnote{Spring 2013 problem set.}}
+
+Consider a cash-in-advance model in which there are two types of
+goods: $c_1$ requires money $M_t$ to purchase, while $c_2$ can be
+purchased on credit. The two goods are technologically equivalent, as
+the endowment $e_t$ can be converted one-for-one into either of them,
+so $e_t = c_{1t}+c_{2t}$. Suppose that $e_t$ follows a Markov process
+with transition density $Q(e'|e)$. A representative agent in this
+economy thus solves:
+\begin{equation*}
+  \max_{\{c_{1t},c_{2t},M_t\}} \E_0\sum_{t=0}^\infty\beta^tu(c_{1t},c_{2t})
+\end{equation*}
+subject to the budget constraint:
+\begin{equation*}
+  P_tc_{1t}+P_tc_{2t}=P_te_t+M_t-M_{t+1},
+\end{equation*}
+and the cash-in-advance constraint:
+\begin{equation*}
+  P_tc_{1t}\le M_t.
+\end{equation*}
+\begin{enumerate}
+\item Write down the Bellman equation for the representative household
+  and find the optimality conditions.
+
+\sol{
+
+Recursive formulation:
+
+\begin{gather*}
+  V(M,e)=\max_{c_1,c_2,M'} u(c_1,c_2)+\beta\E[V(M',e')|e]\\
+  \text{s.t. } c_1+c_2=e+\frac{M-M'}{P}\\
+  Pc_1\le M
+\end{gather*}
+
+With Lagrangian multipliers on constraints:
+\begin{equation*}
+  V(M,e)=\max_{c_1,c_2,M'} u(c_1,c_2)+\eta(e+\frac{M-M'}{P}-c_1-c_2) + \lambda(M-Pc_1) + \beta\E[V(M',e')|e]
+\end{equation*}
+
+Taking first order conditions:
+\begin{align*}
+  [c_1]&: u_1(c_1,c_2)=\eta+\lambda P\\
+  [c_2]&: u_2(c_1,c_2)=\eta\\
+  [M']&: \beta\E[V_1(M',e')|e]=\eta/P
+\end{align*}
+
+Envelope condition:
+\begin{equation*}
+  [M] : V_1(M,e) = \eta/P + \lambda
+\end{equation*}
+
+Combine to obtain Euler equation:
+\begin{equation*}
+  \frac{\eta}{P}=\beta\left(\frac{\eta'}{P'}+\lambda'\right)
+\end{equation*}
+
+If CIA constraint is not binding, $\lambda = 0$:
+\begin{equation*}
+  u_1(c_1,c_2)=u_2(c_1,c_2), \quad \frac{u_1(c_1,c_2)}{P}=\beta\frac{u_1(c_1',c_2')}{P'}
+\end{equation*}
+
+If it is binding, $\lambda>0$:
+\begin{equation*}
+  u_1(c_1,c_2)>u_2(c_1,c_2), \quad \frac{u_2(c_1,c_2)}{P}=\beta\frac{u_1(c_1',c_2')}{P'}>\beta\frac{u_2(c_1',c_2')}{P'}
+\end{equation*}
+
+
+}
+
+\item Consider a steady state equilibrium in which the endowment is
+  constant $e_t=e$, the money supply grows at a constant rate:
+  $M_{t+1}=\mu M_t$, and real balances $M_t/P_t$ are constant. What is
+  the minimal level of $\mu$ that will support a steady state monetary
+  equilibrium? Is such equilibrium Pareto efficient?
+
+\sol{
+
+  Steady state conditions imply $P'=\mu P$, $u_2(c_1,c_2)=const$ and
+  $\eta=\eta'$. The Euler equation becomes:
+\begin{gather*}
+  \mu\eta=\beta(\eta'+\lambda' P')\\
+  \mu = \beta + \lambda' \beta P' / \eta
+\end{gather*}
+
+Lagrange multiplier $\lambda' \ge 0$, so the minimal level of $\mu$
+consistent with household optimization is $\mu = \beta$ with
+$\lambda=0$. Such equilibrium is Pareto optimal, since it satisfies
+the Friedman rule: real rate of return on money is equal to a
+risk-free rate of return: $P/P'=1/\mu=1/\beta$. CIA constraint is
+``barely'' binding ($\lambda=0$, but money is held in equilibrium) and
+saving in the form of money is as efficient as any other asset.
+
+}
+
+\end{enumerate}
+
+\end{document}

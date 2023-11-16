@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts,amsmath}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+
+% PAGE DIMENSIONS
+\setlength{\textwidth}{16.25cm} \setlength{\topmargin}{-1cm}
+\setlength{\evensidemargin}{5cm} \setlength{\oddsidemargin}{0cm}
+ \setlength{\textheight}{22.25cm}
+
+\begin{document}
+\begin{tabular}{lcr}
+Noah Williams &\hspace*{150pt} & Economics 712 \\
+Department of Economics && Macroeconomic Theory \\
+University of Wisconsin && Spring 2016
+\end{tabular}
+\vspace{12pt}
+
+\begin{center}
+\textbf{\large Final Examination} \vspace{12pt}
+\end{center}
+
+\noindent \textbf{Instructions:}\ This is a 75 minute exam with
+worth a total of 100 points. Point values on each part are marked.
+\textbf{Allocate your time wisely.} In
+order to get full credit, you must give a clear, concise, and
+correct answer, including all necessary explanations and
+calculations. Notes, books, and calculators are not permitted.
+
+\bigskip
+
+\begin{enumerate} 
+\item \textbf{[50 points]} Consider a representative agent exchange economy with money, where
+the aggregate endowment $Y_t$ is governed by an exogenous process:
+\begin{equation}\label{output}
+\log \frac{Y_{t}}{Y_{t-1}} = \mu  + \sigma W_{t}
+\end{equation}
+where $\mu \ge 0$ is the mean growth rate, and $W_t$ is an i.i.d.\ standard normal endowment
+shock. Preferences over consumption $c_t$ and real money
+balances $m_t= M_t/P_t$ are:
+\[E_0 \sum_{t=0}^\infty \beta^t \left[\frac{c_t^{1-\gamma}}{1-\gamma} + v(m_t) \right],\]
+where $v$ is strictly increasing, strictly concave,
+and differentiable.  The agent can trade in  a
+stock (claim to the endowment stream) with price $S_t$, a risk-free real bond (paying one unit of real goods) with 
+price $1/R_t$, and a risk-free nominal bond (paying one unit of nominal goods with real value $P_{t}/P_{t+1}$)  with price $1/I_t$. 
+
+Denote household wealth $x_t$ and suppose the agent is endowed with the stock and the initial
+money: $x_0 = S_0 + M_0/P_0$. The agent then
+chooses his consumption $c_t$, real money holdings $m_t$, holdings of
+the real bond $\alpha_{bt}$, the nominal bond $\alpha_{B_t}$ and the
+stock $\alpha_{St}$. The agent's wealth is then:
+\[x_t =
+\alpha_{bt} + \alpha_{Bt} + \alpha_{St} + m_t\] which satisfies
+the budget constraint:
+\begin{eqnarray*}
+ x_{t+1} &=& x_t - c_t + \alpha_{b_t} (R_t-1) + \alpha_{Bt} (I_t-1) +
+ \alpha_{St} r_t^s + \frac{M_t^s}{P_t} - m_t
+\end{eqnarray*}\unskip
+where $r_t^s=(Y_t + S_t)/S_{t-1}-1$ is the return on the stock.
+
+\emph{Postmortem: This budget constraint appeared on the exam, but it
+  is incorrect. See solution for details.}
+
+\begin{enumerate}
+\item \textbf{[20 points]} Find the agent's optimality conditions, then impose the equilibrium conditions (with nominal and real bonds in zero net supply) to characterize equilibrium prices and interest rates.
+\item \textbf{[10 points]} Given the specification for the endowment process, solve explicitly for the net real interest rate $r_t=\log(R_t)$ and describe how it depends on the growth and volatility of output and the agent's preferences.
+\item \textbf{[5 points]} We will solve for equilibria of the form $P_t = Y_t^a$ for some $a$. Define $\pi_t = \log E_t (P_{t+1}/P_t)$ as the net expected inflation rate.  Show that a given $\pi_t$ is (typically) consistent with two values of $a$.
+\item \textbf{[5 points]} Solve for equilibrium nominal interest rate $i_t = \log(I_t)$ in this class of equilibria.  
+\item \textbf{[10 points]} Suppose that monetary policy pegs a constant interest rate $i_t = \bar i$.  Show that if $\sigma = 0$ there is a unique equilibrium, but if $\sigma>0$ there are two equilibria.  Interpret your answer in terms of the Fisher equation and inflation risk.
+\end{enumerate}
+
+
+\item  \textbf{[30 points]} Consider a continuous time search model with variable intensity.  That is unemployed workers earn benefits $z$ and choose an intensity level $s$ which has (monetary) utility costs $c(s)$ which are increasing and convex, but increases the likelihood of finding a job $q(s)$ where $q$ is increasing and concave.  When employed, a worker earns a constant wage $w$ and the job is subject to destruction at rate $\lambda$.
+\begin{enumerate}
+\item \textbf{[20 points]} Write down the Hamilton-Jacobi-Bellman equations determining the value $U(s)$ of an unemployed worker who searches with intensity $s$ and $W$ of an employed worker.  Find the steady state values of $U(s)$ and $W$.
+\item  \textbf{[5 points]} Characterize the optimal choice of $s$ for a currently unemployed worker (taking as given his search intensities in future unemployment spells), assuming $q'(s)=q(s)/s$.
+\item  \textbf{[5 points]} How does the optimal search intensity in a steady state respond to an increase in the wage $w$?
+\end{enumerate}
+
+\item \textbf{[20 points]} Answer the following:
+\begin{enumerate}
+\item  \textbf{[7 points]}  Why is inflation costly in the New Keynesian model?
+\item   \textbf{[7 points]} What is the equity premium puzzle and why can't it be resolved by higher $\gamma$ with preferences $u(c)=c^{1-\gamma}/(1-\gamma)$?
+\item  \textbf{[6 points]} What is a time consistency problem and how does it arise in Ramsey optimal taxation?
+\end{enumerate}
+
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+\end{document}
+
+

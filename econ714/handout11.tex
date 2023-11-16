@@ -1,0 +1,246 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{etoolbox}
+%\usepackage[margin=1.5in]{geometry}
+
+\newtoggle{sol}
+\settoggle{sol}{false} % set false to hide solutions, true to display
+\newcommand{\sol}[1]{\iftoggle{sol}{{\color{blue} #1 }}{}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{Econ 714: Handout 11 \iftoggle{sol}{- Solution}{}}
+\author{Anton Babkin}
+
+\begin{document}
+
+% \iftoggle{sol}{}{
+%   \pagenumbering{gobble}
+% }
+
+{\Large Econ 714: Handout 11 \sol{- Solution}\footnote{By Anton Babkin. This version: \today.}}
+
+\section*{Credit constraints and business cycles\footnote{These notes
+    present a simplified version of a model from Kocherlakota (2000)
+    ``Creating business cycles through credit constraints''.}}
+
+This model presents a mechanism consistent with business cycle
+stylized facts without relying on a persistent exogenous TFP
+shock. The three business cycle characteristics of interest are:
+\begin{enumerate}
+\item Size - amplitude of fluctuations is large.
+\item Persistence.
+\item Asymmetry - downward movements are sharper and quicker than
+  upward ones.
+\end{enumerate}
+
+Firm's capital $X$ fully depreciates between periods and is used in
+production technology $F(X)$, $F'>0, F''<0$. Firm can borrow at
+exogenous borrowing rate $r$ up to a limit
+$B_{t+1}\le\bar{B}$. Utility is discounted at rate $\beta=1/(1+r)$.
+
+Firm's problem:
+\begin{gather*}
+  \max_{C,X,B} \sum \beta^t \ln(C_t)\\
+  Y_t=F(X_t)\\
+  \text{s.t. } C_t+X_{t+1}+B_t(1+r)=Y_t+B_{t+1}\\
+  B_{t+1}\le\bar{B}\\
+  C_t,X_t\ge 0\\
+  X_0,B_0\text{ given}
+\end{gather*}
+
+Rewrite in Bellman form with Lagrange multiplier $\lambda_t$:
+\begin{equation*}
+  V(X_t,B_t)=\max_{X_{t+1},B_{t+1}}\ln(F(X_t)+B_{t+1}-X_{t+1}-B_t(1+r))+\lambda_t(\bar{B}-B_{t+1})+\beta V(X_{t+1},B_{t+1})
+\end{equation*}
+
+Derive Euler equations:
+\begin{align}
+  \text{FOC: } \quad X_{t+1} & : -\frac{1}{C_t}+\beta V_X(t+1)=0\nonumber\\
+  B_{t+1} &: \frac{1}{C_t}+\beta V_B(t+1)-\lambda_t=0\nonumber\\
+  \text{ENV: } \quad X_t & : V_X(t)=\frac{1}{C_t}F_X(t)\nonumber\\
+  B_t & : V_B(t)=-\frac{1}{C_t}(1+r)\nonumber\\
+  \text{EE: } \quad & \frac{1}{C_t}=\beta\frac{1}{C_{t+1}}F_X(X_{t+1})\label{eq:eex}\tag{$EE_X$}\\
+                            & \frac{1}{C_t}=\beta\frac{1}{C_{t+1}}(1+r)+\lambda_t\label{eq:eeb}\tag{$EE_B$}
+\end{align}
+
+We are interested in seeing how GDP $Y_t$ would respond to an
+unexpected shock to initial wealth $F(X_0)-B_0(1+r)$.
+
+Let's start by characterizing the steady state equilibrium,
+$C_t=C,X_t=X,B_t=B$. It follows from \eqref{eq:eeb} and $\beta(1+r)=1$
+that in steady state $\lambda_t=0$, i.e. borrowing constraint is never
+binding.
+
+\eqref{eq:eex} becomes $F_X(X_{t+1})=1+r$, so it can be solved for
+steady state $X$. Marginal product of capital is equal to the
+exogenous rate of return.
+
+Budget constraint in steady state with $B_t=B_0=B$ can be solved for $C$:
+\begin{equation*}
+C+X+rB=F(X)
+\end{equation*}
+  
+If the economy starts in steady state $X_0=X,B_0=B\le\bar{B}$, it will
+stay there forever. Notice that it is possible to have
+$B_0=\bar{B}$. If this can still be a steady state equilibrium,
+borrowing constraint $B_{t+1}\le\bar{B}$ is ``barely'' binding.
+
+Suppose that the economy starts at steady state and there is an
+additive exogenous shock $\Delta$ to the initial wealth
+$F(X_0)-B_0(1+r)$.
+
+If the shock is positive, extra resources could be used to increase
+capital stock $X_1$, but that would not be optimal because capital is
+already at the optimal level. Instead, debt level $B_1$ will be
+reduced, so that interest payments $rB_t$ will be smaller, and
+consumption $C_t$ higher. No change in $X_t$ implies no change in
+$Y_t$: GDP does not respond to a positive wealth shock.
+
+If the shock is negative, but not to big, then debt can be increased
+without hitting the credit constraint. Lifetime consumption will be
+lower, but again there will be no change in $X_t$ or $Y_t$.
+
+If negative shock is sufficiently large, to accommodate it firms will
+have to both increase the debt level to the limit $B_1=\bar{B}$ and to
+reduce capital $X_1<X$, implying a drop in output $Y_1$. Subsequent
+dynamics is similar to a neoclassical growth model after a negative
+shock to capital: output $Y_t$ will gradually converge to the steady
+state, accompanied with gradual increase in consumption.
+
+So far, the model has two desirable features: \emph{asymmetry} (only
+sufficiently large negative shocks have impact on GDP) and
+\emph{persistence} (temporary shock to wealth has long-lasting effect
+on output).
+
+Next we will consider \emph{amplification}, i.e. the size of the
+output response relative to the initial disturbance. Let's define it
+as $A\equiv\frac{Y_1-Y}{\Delta}$. This analysis is easier to perform on
+the linearized version of the model. Assume $F(X)=X^\alpha$.
+
+Suppose that the economy starts at the steady state, and
+$B_0=\bar{B}$. As the borrowing level is at the limit, a small
+negative shock will drive the economy into a downturn. Borrowing will
+always be at the limit, and capital, output and consumption will
+gradually converge back to the steady state. The dynamic behavior of
+the system will be described by the Euler equation \eqref{eq:eex},
+budget constraint with constant $B_t=B=\bar{B}$ and initial condition
+$X_0$:
+\begin{gather*}
+  \frac{1}{C_t}=\beta\frac{1}{C_{t+1}}\alpha X_{t+1}^{\alpha-1}\\
+  C_t+X_{t+1}+rB=X_t^\alpha+\epsilon_t\\
+  X_0=X
+\end{gather*}
+where $\epsilon_0=\Delta$ and $\epsilon_t=0,t>0$.
+
+Log-linearize around the steady state using lower-case variable names
+for percentage deviations, $x_t\approx\frac{X_t-X}{X}$ etc.
+
+\begin{gather*}
+  c_t=c_{t+1}+(1-\alpha)x_{t+1},\quad\forall t\\
+  \frac{C}{X}c_t+x_{t+1}=\frac{1}{\beta}x_t,\quad t>0\\
+  \frac{C}{X}c_0+x_{1}=\frac{1}{\beta}x_0+\frac{\Delta}{X}\\
+  x_0=0
+\end{gather*}
+
+This is a system of second order linear difference equations with
+initial conditions. We can turn it into a single second-order
+difference equation by substituting out $c_t$.
+
+\begin{gather}
+  x_{t+2}+(-1-\frac{1}{\beta}-\frac{C}{X}(1-\alpha))x_{t+1}+\frac{1}{\beta}x_t=0,\quad t>0\label{eq:de}\\
+  x_{2}+(-1-\frac{1}{\beta}-\frac{C}{X}(1-\alpha))x_{1}+\frac{\Delta}{X}=0\label{eq:ini}\\
+  x_0=0\nonumber
+\end{gather}
+
+\eqref{eq:de} is a homogenous second order difference equation. It's
+charactristic equation
+$z^2+(-1-\frac{1}{\beta}-\frac{C}{X}(1-\alpha))z+\frac{1}{\beta}=0$ has roots
+\begin{equation*}
+  z=\frac{m\pm\sqrt{m^2-4/\beta}}{2}
+\end{equation*}
+where $m=1+\frac{1}{\beta}+\frac{C}{X}(1-\alpha)$.
+
+Roots are real and distinct, in which case the general solution of
+equation \eqref{eq:de} is $x_t=\kappa_1 z_1^t+\kappa_2z_2^t$, where
+$\kappa_1$ and $\kappa_2$ are constants pinned down by initial
+condition.
+
+One can show that $0<z_1<1$ and $z_2>1$. We are only interested in the
+stable solution, so we set $\kappa_2=0$. Let $\gamma\equiv
+z_1<1$. Then solution is characterized by
+$x_{t+1}=\gamma x_t,\quad t>0$. Substitute this back to \eqref{eq:ini}
+to solve for $x_1=\beta\gamma\frac{\Delta}{X}$.\footnote{This is shown
+  in equation (43) in Kocherlakota (2000), but I could not derive it
+  myself.}
+
+Log-linearizing $Y_t=X_t^\alpha$ yields $y_t=\alpha x_t$, and in
+steady state $1=\beta\alpha\frac{Y}{X}$, so
+\begin{equation*}
+  y_1=\alpha\beta\gamma\frac{\Delta}{X}=\gamma\frac{\Delta}{Y}
+\end{equation*}
+
+Going back to the definition of amplification ratio:
+\begin{equation*}
+  A\equiv\frac{Y_1-Y}{\Delta}=\frac{Y_1-Y}{Y}\frac{Y}{\Delta}=y_1\frac{Y}{\Delta}=\gamma
+\end{equation*}
+
+So $A=\gamma<1$, i.e. there is a less than one unit change in GDP in
+response to a one unit shock to initial wealth. The paper also shows
+that if $\bar{B}\to 0$, then $A\to\alpha$ and if $\bar{B}$ gets big
+enough, then $A\to 1$. But there is no amplification in a model with
+exogenous borowing limit $\bar{B}$.
+
+However in a full version of the model, presented in Kocherlakota
+(2000), $A>1$, i.e. there is an amplification of the initial
+shock. Check the paper for details, but here is the intuition.
+
+Output is produced using capital and land, $Y=F(X,L)$. $X$ and $L$ are
+complementary. Land $L$ is in limited supply and can be traded at
+price $Q$. Suppose that the borrowing limit is
+$B_{t+1}\le Q_tL_t$. This can be interpreted as collateral constraint:
+firms cannot borrow more than the market value of their
+non-depreciating assets.
+
+If there is a negative shock to initial wealth, demand for capital
+$X^d$ falls. As land is a complementary input, demand for land $L^d$
+also falls. Supply of land is fixed, so equilibrium land price $Q$
+falls. If the firm was at the limit of it's collateral constraint,
+tightening of the constraint means that it has to borrow less. But
+this is equivalent to a negative wealth shock, so loop starts over:
+$B\Downarrow\to X\Downarrow\to Q\Downarrow\to B\Downarrow\to ...$.
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

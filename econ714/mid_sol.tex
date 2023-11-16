@@ -1,0 +1,208 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{enumerate}
+%\usepackage[margin=1in]{geometry}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{Econ 714: Final exam - Solution}
+\author{Anton Babkin}
+
+\begin{document}
+
+{\Large Econ 714: Final exam - Solution\footnote{By Anton Babkin. \today.}}
+
+\section[]{}
+The correct budget constraint for this problem must be, in nominal terms:
+\begin{equation*}
+  P_tc_t+M_t+\frac{\alpha_{Bt}}{I_t}+P_t\frac{\alpha_{bt}}{R_t}+P_tS_t\alpha_{St}=\tau_{t-1}+M_{t-1}+\alpha_{Bt-1}+P_t\alpha_{bt-1}+P_t(Y_t+S_t)\alpha_{St-1}
+\end{equation*}
+where $\tau_t = M_t^s-M_t$ is nominal transfer/tax from changing money supply.
+
+At time $t$ decisions are made over $t$-indexed variables, and $t-1$
+variables are states resulting from the previous period.
+
+In real terms:
+\begin{equation*}
+  c_t+m_t+\frac{\alpha_{Bt}}{P_tI_t}+\frac{\alpha_{bt}}{R_t}+S_t\alpha_{St}=\frac{\tau_{t-1}}{P_t}+m_{t-1}\frac{P_{t-1}}{P_t}+\frac{\alpha_{Bt-1}}{P_t}+\alpha_{bt-1}+(Y_t+S_t)\alpha_{St-1}
+\end{equation*}
+
+\begin{enumerate}[(a)]
+\item With Lagrange multiplier on budget constraint $\lambda_t$, first
+  order conditions are:
+  \begin{align*}
+    [c_t]&:\beta^tu'(c_t)=\lambda_t\\
+    [\alpha_{bt}]&:\frac{\lambda_t}{R_t}=\E_t\lambda_{t+1}\\
+    [\alpha_{Bt}]&:\frac{\lambda_t}{P_tI_t}=\E_t\lambda_{t+1}\frac{1}{P_{t+1}}\\
+    [\alpha_{St}]&:\lambda_tS_t=\E_t\lambda_{t+1}(Y_{t+1}+S_{t+1})\\
+    [m_t]&:\beta^tv'(m_t)-\lambda_t+\E_t\lambda_{t+1}\frac{P_t}{P_{t+1}}=0
+  \end{align*}
+
+  Substitute out $\lambda_t$ and plug in goods market clearing
+  $c_t=Y_t$ to obtain equilibrium pricing conditions:
+
+  \begin{gather*}
+    \frac{1}{R_t}=\beta\E_t\frac{u'(Y_{t+1})}{u'(Y_t)}\\
+    \frac{1}{I_t}=\beta\E_t\frac{u'(Y_{t+1})}{u'(Y_t)}\frac{P_t}{P_{t+1}}\\
+    S_t=\beta\E_t\frac{u'(Y_{t+1})}{u'(Y_t)}(Y_{t+1}+S_{t+1})\\
+    1-\frac{v'(m_t)}{u'(Y_t)}=\beta\E_t\frac{u'(Y_{t+1})}{u'(Y_t)}\frac{P_t}{P_{t+1}}=\frac{1}{I_t}
+  \end{gather*}
+
+\item Endowment process is
+  $\frac{Y_{t+1}}{Y_t}=\exp(\mu+\sigma W_{t+1})$. Using real bond
+  pricing equation:
+  \begin{align*}
+    \frac{1}{R_t}&=\beta\E_t\left(\frac{Y_{t+1}}{Y_t}\right)^{-\gamma}\\
+                 &=\beta\E_t\exp(-\gamma\mu-\gamma\sigma W_{t+1})\\
+                 &=\beta\exp(-\gamma\mu+\gamma^2\sigma^2/2)\\
+    -\log R_t&=\log\beta-\gamma\mu+\gamma^2\sigma^2/2\\
+    r_t&=\gamma\mu-\gamma^2\sigma^2/2-\log\beta
+  \end{align*}
+
+  Real bonds return positively depends on growth rate $\mu$ and
+  negatively on volatility $\sigma$ and patience $\beta$. Effect of
+  $\gamma$ is ambiguous.
+  
+\item
+  \begin{align*}
+    \pi_t&\equiv\log\E_t\frac{P_{t+1}}{P_{t}}\\
+         &=\log\E_t\left(\frac{Y_{t+1}}{Y_t}\right)^a\\
+         &=\log\E_t\exp(a\mu+a\sigma W_{t+1})\\
+         &=a\mu+a^2\sigma^2/2
+  \end{align*}
+
+  If $\sigma=0$, then simply $\pi_t=a\mu$. If $\sigma>0$, this is a
+  quadratic equation in $a$ which generally has two roots:
+  \begin{equation}\label{eq:a}
+    a=\frac{-\mu\pm\sqrt{\mu^2+2\sigma^2\pi_t}}{\sigma^2}
+  \end{equation}
+
+\item Using nominal bond pricing equation and solution of class
+  $P_t=Y_t^a$:
+  \begin{align*}
+    \frac{1}{I_t}&=\beta\E_t\left(\frac{Y_{t+1}}{Y_t}\right)^{-\gamma-a}\\
+                 &=\beta\exp(-(\gamma+a)\mu+(\gamma+a)^2\sigma^2/2)\\
+-\log I_t&=\log\beta-(\gamma+a)\mu+(\gamma+a)^2\sigma^2/2\\
+    i_t&=(\gamma+a)\mu-(\gamma+a)^2\sigma^2/2-\log\beta\\
+                 &=\gamma\mu-\gamma^2\sigma^2/2-\log\beta
+                   +a\mu+a^2\sigma^2/2-\gamma a \sigma^2 - a^2\sigma^2\\
+                 &=r_t+\pi_t-\gamma a \sigma^2 - a^2\sigma^2
+  \end{align*}
+  where $a$ is given by the equation~\eqref{eq:a}.
+
+\item Without risk, $\sigma=0$, Fisher equation holds exactly and in
+  unique equilibrium $\pi_t=\bar{i}_t-r_t$, $a=\pi_t/\mu$.
+
+  If $\sigma>0$, there might be two possible inflation levels in
+  equilibrium that correspond to the two roots for $a$.
+
+  In these equilibria inflation is a function of the endowment growth,
+  so return on the real bond is correlated with
+  inflation. Decomposition of nominal interest rate into real interest
+  rate and inflation (Fisher equation) now includes an additional
+  covariance term - inflation risk - that can take two values for different $a$:
+
+  \begin{align*}
+    \frac{1}{I_t}&=\beta\E_t\frac{u'(Y_{t+1})}{u'(Y_t)}\frac{P_t}{P_{t+1}}\\
+                 &=\E_t\beta\frac{u'(Y_{t+1})}{u'(Y_t)}\E_t\frac{P_t}{P_{t+1}}+Cov_t\left(\beta\frac{u'(Y_{t+1})}{u'(Y_t)},\E_t\frac{P_t}{P_{t+1}}\right)\\
+                 &=\frac{1}{R_t}\E_t\frac{P_t}{P_{t+1}}+Cov_t\left(\beta\left(\frac{Y_{t+1}}{Y_t}\right)^{-\gamma},\left(\frac{Y_{t+1}}{Y_t}\right)^{-a}\right)
+  \end{align*}
+
+\end{enumerate}
+
+
+\section{}
+\begin{enumerate}[(a)]
+\item
+  \begin{gather*}
+    rW=w+\lambda(U(s)-W)\\
+    rU(s)=z-c(s)+q(s)(W-U(s))
+  \end{gather*}
+
+  Solve for $W-U = \frac{w-z+c(s)}{r+\lambda+q(s)}$. Substitute back
+  to get steady state values of $U(s)$ and $W$:
+\begin{gather*}
+  rW = w-\lambda\frac{w-z+c(s)}{r+\lambda+q(s)}\\
+  rU(s)=z-c(s)+q(s)\frac{w-z+c(s)}{r+\lambda+q(s)}
+\end{gather*}
+
+\item First order condition of the unemployed with respect to $s$:
+  \begin{equation}\label{eq:s}
+    c'(s)=q'(s)(W-U)=q'(s)\frac{w-z+c(s)}{r+\lambda+q(s)}
+  \end{equation}
+
+\item Rewrite \eqref{eq:s} as
+  \begin{equation*}
+    \frac{c'(s)(r+\lambda)}{q'(s)}+c'(s)s-c(s)=w-z
+  \end{equation*}
+
+  Derivative of the LHS with respect to $s$ is
+  \begin{align*}
+    (r+\lambda)\frac{c''(s)q'(s)-c'(s)q''(s)}{(q'(s))^2}+c''(s)s+c'(s)-c'(s)\\
+    =(r+\lambda)\frac{c''(s)q'(s)-c'(s)q''(s)}{(q'(s))^2}+c''(s)s
+  \end{align*}
+  and is positive since $c''(s)>0$ and $q''(s)<0$.
+
+  So the LHS is increasing in $s$ and the RHS is constant. So $s$
+  increases as $w$ increases.
+
+\end{enumerate}
+
+\section{}
+
+\begin{enumerate}[(a)]
+\item When price level fluctuates, and not all firms are able to
+  adjust, price dispersion results. This causes the relative prices of
+  the different goods to vary. If the price level rises, two things
+  happen:
+  \begin{itemize}
+  \item The relative price of firms who have not set their price for a
+    while falls, they experience an increase in demand and raise
+    output. Firms who have just reset their prices reduce output. This
+    production dispersion is inefficient.
+  \item Consumers increase consumption of the goods whose relative
+    price has fallend a reduce cunsumption of those goods whose
+    relative price has risen. This dispersion in consumption reduces
+    welfare.
+  \end{itemize}
+
+\item Risk premium of a risky return over a risk-free one can be expressed as
+  \begin{equation*}
+    \frac{E(r_t)-r^f}{\sigma(r)}=\gamma\sigma(\Delta c_t)corr(\Delta c_t,r_t)
+  \end{equation*}
+
+  A puzzle is that empirical estimates of this equation imply that
+  $\gamma$ needs to be about 27. This is a puzzle, because such high
+  levels of risk-aversion imply implausibly high premiums
+  invidividuals will be willing to pay to avoid taking lotteries with
+  zero expected payoff. Existing micro-level studies suggest that
+  $\gamma$ should be in the order of 2 to 3.
+
+  But even if we allow risk-aversion to be very high, it won't resolve
+  the puzzle. With CRRA utility $\gamma$ is not only a coefficient of
+  relative risk-aversion, but also an inverse of the elastisity of
+  intertemporal substitution. For an observed levels of aggregate
+  consumption growth, this implies that risk-free rate must be much
+  higher than it historically was.
+
+\item Time consistency problem arises when future plans that are
+  optimal at a particular point in time become not optimal when that
+  future actually comes.
+
+  In Ramsey problem, it is socially optimal to set zero tax on returns
+  to capital for all future periods except the initial one, because
+  then capital is already in place, and proportional tax effectively
+  becomes a lump sum tax and does not distort households'
+  incentives. However if the planner is allowed to reoptimize at some
+  time in the future, he would choose to deviate from the zero-tax
+  plan and tax capital in that period.
+
+\end{enumerate}
+
+
+
+\end{document}

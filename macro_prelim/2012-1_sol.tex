@@ -1,0 +1,275 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{etoolbox}
+\usepackage[margin=1.5in]{geometry}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{Macro prelim solutions - June 2012}
+\author{Anton Babkin}
+
+\begin{document}
+
+{\Large Macro prelim solutions - June 2012\footnote{By Anton
+    Babkin. This version: \today.}}
+
+\textit{Disclaimer: These are unofficial solutions, they might have
+  errors and be incomplete. Your comments and corrections are welcome.}
+
+\
+\section*{Question 2A}
+
+Looks like there is a typo in the utility function, and I change it to
+the following:
+
+\begin{equation*}
+  u(t,c_t)=\left(\Pi_{s=1}^t\beta_s\right)\log(c_t)
+\end{equation*}
+
+\textit{I also assume that in the recursive problem, discount factor
+  for the next period is unknown when decision is made,
+  $V(\beta)=\max u+\E\beta'V(\beta')$. Another, possibly even better,
+  interpretation could be $V(\beta)=\max u+\beta\E V(\beta')$.}
+
+\begin{enumerate}[(a)]
+\item Recursive problem:
+  \begin{gather*}
+    V(d_t,\beta_t)=\max \log(c_t)+\E\beta_{t+1}V(d_{t+1},\beta_{t+1})\\
+    \text{s.t. } c_t+P_ta_{t+1}+q_tb_{t+1}=(P_t+d_t)a_t+b_t
+  \end{gather*}
+Standard asset pricing Euler equations with  market clearing condition $c_t=d_t$:
+  \begin{gather*}
+    P_t=\E_t\beta_{t+1}\frac{d_t}{d_{t+1}}(P_{t+1}+d_{t+1})\\
+    q_t=\E_t\beta_{t+1}\frac{d_t}{d_{t+1}}\\
+  \end{gather*}
+
+  With $\beta$ and $d$ following Markov process, state at $t$ has
+  information about state at $t+1$. For example, if process is
+  persistent and $\beta_t$ is high, then $\E_t\beta_{t+1}$ is also
+  high. Then then agents are more patient, and prices of both assets
+  will be higher, risk-free rate $R=1/q$ and expected return on the tree -
+  lower. When $d_t$ is high, it will go down in expectation, so
+  $\E_t\frac{d_t}{d_{t+1}}$ is higher, so the prices are higher.
+
+  \item 
+    \begin{align*}
+      q_t&=\E_t\beta_{t+1}\frac{d_t}{d_{t+1}}\\
+         &=d_t\left(\pi\frac{\beta_1}{d_1}+(1-\pi)\frac{\beta_2}{p_2}\right)
+    \end{align*}
+
+    Risk-free rate:
+    \begin{equation*}
+      R_t = \frac{1}{q_t}=\frac{1}{d_t\left(\pi\frac{\beta_1}{d_1}+(1-\pi)\frac{\beta_2}{p_2}\right)}
+    \end{equation*}
+
+  \item Risk-free rate with constant $\beta$ will be lower if
+    \begin{equation*}
+      \beta(\frac{\pi}{d_1}+\frac{1-\pi}{d_2})>\pi\frac{\beta_1}{d_1}+(1-\pi)\frac{\beta_2}{p_2}
+    \end{equation*}
+    Simplifying this inequality yields
+    \begin{equation*}
+      \beta_2>\beta_1
+    \end{equation*}
+
+\end{enumerate}
+
+
+
+\section*{Question 3}
+  Parts of this problem can be interpreted differently. I assume the following:
+  \begin{itemize}
+  \item Productivity shock $\varepsilon$ is drawn independently for
+    every period, cohort and household. I.e. old parent can have
+    different productivity from when he was young.
+  \item Intra-vivos transfer $i$ is chosen by parents when they are
+    old, in the third period.
+  \item Borrowing is not allowed.
+  \end{itemize}
+
+\begin{enumerate}
+ \item Young parent:
+  \begin{gather*}
+    V(a,i,h,\varepsilon,a_k,b)=\max_{n,c_y,e,e_k,s}u(c_y)+\beta\E_{a'|a,\varepsilon'}J(s,b,a_k,a',h_o',h_k',\varepsilon')\\
+    \text{s.t. } c_y+e+e_k+s=i+wh(1-n)\varepsilon\\
+    h_o'=a(nh)^{\gamma_1}e^{\gamma_2}+(1-\delta)h\\
+    h_k'=a_kh^{\gamma_1}e_k^{\gamma_2}+(1-\delta)h
+  \end{gather*}
+
+Old parent:
+\begin{gather*}
+  J(s,b,a_k,a',h_o',h_k',\varepsilon')=\max_{c_o',i',b'}u(c_o')+\theta V(a_k,i',h_k',\varepsilon',a',b')\\
+  \text{s.t. }c_o'+i'+b'=Rb+Rs+wh_o'\varepsilon'  
+\end{gather*}
+
+\item \textit{Plug in $J$ into $V$, and use standard argument of
+    Blackwell's sufficient condition (monotonicity and discounting)
+    for $V$.}
+
+\item \textit{Plug $J$ into $V$ and apply Stokey-Lucas theorems.}
+
+\item Plug in $c_y,h_o',h_k',c_o$ from constraints.
+
+FOC:
+\begin{eqnarray*}
+  n:&wh\varepsilon u'(c_y)=\beta\E J_5(t)\frac{dh_o'}{dn}\\
+  e:&u'(c_y)=\beta\E J_5(t)\frac{dh_o'}{de}\\
+  e_k:&u'(c_y)=\beta\E J_6(t)\frac{dh_k'}{de_k}\\
+  s:&u'(c_y)=\beta\E J_1(t)\\
+  i':&u'(c_o')=\theta V_2(t+1)\\
+  b':&u'(c_o')=\theta V_6(t+1)
+\end{eqnarray*}
+where
+\begin{eqnarray*}
+  \frac{dh_o'}{dn}=\gamma_1an^{\gamma_1-1}h^{\gamma_1}e^{\gamma_2}\\
+  \frac{dh_o'}{dn}=\gamma_2a(nh)^{\gamma_1}e^{\gamma_2-1}\\
+  \frac{dh_k'}{de_k}=\gamma_2a_k(h)^{\gamma_1}e_k^{\gamma_2-1}
+\end{eqnarray*}
+
+ENV:
+\begin{eqnarray*}
+  J_5(t)=u'(c_o')w\varepsilon'\\
+  J_6(t)=\theta V_3(t+1)\\
+  J_1(t)=u'(c_o')R\\
+  V_2(t)=u'(c_y)\\
+  V_6(t)=\beta\E J_2(t)\\
+  J_2(t)=Ru'(c_o')\\
+  V_3(t)=u'(c_y)w(1-n)\varepsilon+\beta\E[J_5(t)\frac{dh_o'}{dh}+J_6(t)\frac{dh_k'}{dh}]
+\end{eqnarray*}
+where
+\begin{eqnarray*}
+  \frac{dh_o'}{dh}=\gamma_1an^{\gamma_1}h^{\gamma_1-1}e^{\gamma_2}\\
+  \frac{dh_k'}{dh}=\gamma_1a_k(h)^{\gamma_1-1}e_k^{\gamma_2}
+\end{eqnarray*}
+
+Euler equations:
+\begin{eqnarray*}
+  n:&wh\varepsilon u'(c_y)=\beta\E u'(c_o')w\varepsilon'\frac{dh_o'}{dn}\\
+  e:&u'(c_y)=\beta\E u'(c_o')w\varepsilon'\frac{dh_o'}{de}\\
+  e_k:&u'(c_y)=\beta\E \frac{dh_k'}{de_k}\theta\left[
+       u'(c_y')w(1-n')\varepsilon'
+       +\beta u'(c_o'')w\varepsilon''\frac{dh_o''}{dh'}
+       +\beta \frac{dh_k''}{dh'}\theta V_3(t+2)
+       \right]=...\\
+  s:&u'(c_y)=\beta \E Ru'(c_o')\\
+  b':&u'(c_o')=\theta\beta\E Ru'(c_o'')\\
+  i':&u'(c_o')=\theta u'(c_y')
+\end{eqnarray*}
+
+Interpretations:
+\begin{itemize}
+\item $n$: Marginal benefit of working and hence earning more when
+  young must be equal to marginal benefit of having higher human
+  capital and hence earning more when old.
+\item $e$: Marginal cost of investing in own human capital and
+  giving up consumption when young must be equal to marginal benefit
+  of having higher human capital and hence earning more when old.
+\item $e_k$: Marginal cost of investing in child's human capital and
+  giving up consumption when young must be equal to it's marginal
+  benefit that comes in three ways: children earning more when they
+  are young adults, children having higher human capital when they get
+  old and hence earning more, and their children having higher human
+  capital. The last term recursively unfolds into the infinite future,
+  so optimal investment into children accounts for utilities of the
+  whole dynasty.
+\item $s$: Marginal utility of consuming when young equals marginal utility
+  of consuming more when old with added return on savings.
+\item $b'$: Marginal utility of consumtion when old equals marginal
+  utility of children next period when they become old, adjusted for
+  how much parents care about children, $\theta$.
+\item $i'$: Marginal utility of old parents equals marginal utility of
+  their children, adjusted by $\theta$.
+\end{itemize}
+
+\item The difference, as discussed above, is that investment in
+  children has far-reaching effect on all subsequent generations,
+  whereas investment in own human capital only gives benefit in the
+  next period.
+
+\item There are two types of incompleteness in this
+  environment. First, borrowing constraint: young parents can't borrow
+  ($s\ge 0$, and old parents can't pass debt onto their heirs
+  ($b\ge 0$). Second, there are no insurance markets,
+  i.e. state-contingent claims. The first causes over-accumulation of
+  physical and human capital due to a precautionary motive. Absence of
+  contingent markets makes inter-temporal decisions (savings,
+  investment in children, bequests) efficient ex ante (in
+  expectation), but inefficient ex post. Under complete markets,
+  savings will be lower. Investment into children will be such that
+  their human capital only depends on their ability, but not on their
+  parents' wealth. Allocation of resoures will be socially optimal.
+
+\item Because the tax is proportional and the transfer is lump sum,
+  such policy will result in redistribution from the rich (high
+  productivity, high human capital, hence high labor earnings) to the
+  poor (low productivity, low human capital). Redistribution effect
+  will make the rich oppose such intervention.
+
+  On the other hand, such fiscal policy provides a form of insurance
+  and consumption smoothing over different realizations of
+  productivity and ability of future generations. This insurance
+  channel will be valuable for the rich.
+
+\item In the standard Aiyagari-Bewley model agents are
+  over-accumulating physical capital to protect themselves from a
+  sequence of bad shocks in the future, because there is a potentially
+  binding borrowing constraint. If technology exhibits diminishing
+  product of capital, interest rate is inversely related to
+  capital. Capital is above socially optimal level, so interest rate
+  is below socially optimal (which is equal to the rate of time
+  preference).
+
+  In the model with human capital, this might not be true. As in
+  Aiyagari-Bewley, market incompleteness makes agents over-accumulate
+  capital, both physical and human. When technology uses both types of
+  capital, interest rate depends negatively on physical capital, but
+  positively on human capital. Depending on model parameters, either
+  effect might dominate, so interest rates may be above or below the
+  rate of time preference.
+
+\item Notice that such redistribution was already available in the
+  form of intra-vivos transfers. Now a certain amount $T$ of such
+  transfer becomes mandatory. It will not affect househods who's
+  transfer was already big, $i>T$, they will merely reduce $i$ by the
+  amount of $T$. But other households - relatively poor parents of
+  relatively rich children - who choose $i<T$, will be worse off,
+  because they can't reduce their transfer $i$ below zero.
+
+\end{enumerate}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,370 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[margin=1.5in]{geometry}
+
+\begin{document}
+
+\textbf{Macro Example Comp Question from Quarter 1, 2015}:
+
+\textit{With solution}
+
+\bigskip
+
+Analyze the dynamic equilibrium of a two period lived overlapping
+generations production economy with a constant unit measure of identical
+agents in each generation. Each agent's preferences are given by the utility
+function 
+\[
+u(c_{t+1}^{t},n_{t}^{t})=\frac{1}{1-\gamma }(c_{t+1}^{t})^{1-\gamma
+}-n_{t}^{t} 
+\]%
+where $c_{t+1}^{t}$ denotes period $t+1$ consumption of an agent born in
+period $t$ (i.e. an old person), $n_{t}^{t}\in \lbrack 0,1]$ denotes labor
+supplied in period $t$ by an agent born in period $t$ (i.e. a young person).
+and $\gamma \in (0,1)$. Technology is given by the production function $%
+f(k_{t},n_{t})=k_{t}^{1/2}n_{t}^{1/2}$ where $k_{t}$ is total capital
+available to each producer in period $t.$ Capital fully depreciates after
+production, so $k_{t+1}=i_{t}$ where $i_{t}$ is investment chosen by the
+young in period $t$ from their labor earnings. Young agents born in period $%
+t $ supply labor $n_{t}^{t}$ at real wage $w_{t}$ in order to buy capital $%
+k_{t+1}$ which they rent to firms in their second period of life at real
+gross return $R_{t+1}$to obtain funds $R_{t+1}k_{t+1}$for purchasing
+consumption goods $c_{t+1}^{t}$.
+
+\begin{enumerate}
+\item Write down the optimization problem faced by a generation $t$ agent.
+Solve for labor supply and investment decision rules. (5 points)
+
+\textit{Answer:}
+
+Capital depreciates fully, so $k_{t+1}=i_t$, and we can write that
+households choose capital directly. Firm ownership does not matter as
+technology is CRS, and profits will be zero in equilibrium.
+
+  \begin{gather*}
+    \max_{c_{t+1}^t,n_t^t,
+      k_{t+1}}\frac{1}{1-\gamma}(c_{t+1}^{t})^{1-\gamma}-n_{t}^{t}\\
+    \text{s.t. } k_{t+1}=w_tn_t^t\\
+    c_{t+1}^t=R_{t+1}k_{t+1}\\
+    c_{t+1}^t, k_{t+1}\ge 0\\
+    n_{t}^t\in [0,1]
+  \end{gather*}
+
+Assume that parameters are such that $n_t^t\in(0,1)$, i.e. inequality
+constraints are not binding. Utility function satisfies Inada
+conditions, so $c_{t+1}^t\ge 0$ is not binding either.
+
+Using $c_{t+1}=R_{t+1}k_{t+1}=R_{t+1}w_tn_t^t$, rewrite household
+problem as
+\begin{equation*}
+  \max_{n_t^t}\frac{1}{1-\gamma}(R_{t+1}w_tn_t^t)^{1-\gamma}-n_{t}^{t}
+\end{equation*}
+
+Take FOC in $n_t^t$:
+\begin{equation*}
+  R_{t+1}^{1-\gamma}w_t^{1-\gamma}(n_t^t)^{-\gamma}=1
+\end{equation*}
+
+Solve for labor supply, and plug into budget constraint for investment:
+\begin{gather*}
+  n_t^t=R_{t+1}^\frac{1-\gamma}{\gamma}w_t^\frac{1-\gamma}{\gamma}\\
+  k_{t+1}=R_{t+1}^\frac{1-\gamma}{\gamma}w_t^\frac{1}{\gamma}
+\end{gather*}
+
+
+\item Write down the optimization problem faced by a representative firm
+which rents labor at price $w_{t}$ and capital at gross rate $R_{t}$ to
+maximize real profits. (2.5 points)
+
+\textit{Answer:}
+
+Firm's maximizes profit taking prices $R_t,w_t$ as given:
+
+\begin{gather*}
+  \max_{K_t,N_t} y_t - R_tK_t-w_tN_t\\
+\text{s.t. } y_t = K_{t}^{1/2}N_{t}^{1/2}
+\end{gather*}
+
+Labor and capital demand desicions satisfy FOCs:
+\begin{eqnarray*}
+  R_t=\frac{1}{2}K_t^{-\frac{1}{2}}N_t^{\frac{1}{2}}\\
+  w_t=\frac{1}{2}K_t^{\frac{1}{2}}N_t^{-\frac{1}{2}}
+\end{eqnarray*}
+
+\item Define a competitive equilibrium. (2.5 points)
+
+\textit{Answer:}
+
+Competitive equilibrium is an allocation $i_t,k_t,n_t,y_t,c_{t+1}^t$ and prices $R_t,w_t$ such that $\forall t$:
+\begin{itemize}
+\item Allocation solves household and firm optimization problems.
+\item Markets clear:
+  \begin{itemize}
+  \item labor: $n_t=N_t$,
+  \item capital: $k_t=K_t$,
+  \item goods: $c_t^{t-1}+i_t=y_t$
+  \end{itemize}
+\end{itemize}
+
+\item Show that a competitive equilibrium satisfies the following pair of
+first order difference equations%
+\begin{eqnarray*}
+k_{t+1} &=&R_{t}k_{t}, \\
+R_{t+1}^{1-\gamma } &=&4k_{t}^{\gamma }R_{t}^{1+\gamma }.
+\end{eqnarray*}%
+(10 points)
+
+\textit{Answer:}
+
+
+
+Goods market clearing:
+\begin{eqnarray*}
+  k_{t+1}+c_t^{t-1}=k_t^{\frac{1}{2}}n_t^{\frac{1}{2}}
+\end{eqnarray*}
+
+Using HH budget constraints and firm FOCs:
+\begin{eqnarray*}
+  k_{t+1}+R_tk_t=k_t^{\frac{1}{2}}2R_tk_t^{\frac{1}{2}}
+\end{eqnarray*}
+
+This gives the first difference equation:
+\begin{equation*}
+  k_{t+1}=R_tk_t
+\end{equation*}
+
+Use firm FOCs to eliminate $n$ and $w$ from HH FOCs:
+\begin{eqnarray*}
+  R_{t+1}^{1-\gamma}(\frac{1}{4R_t})^{1-\gamma}(4R_t^2k_t)^{-\gamma}=1
+\end{eqnarray*}
+
+Simplify to get the second difference equation:
+\begin{equation*}
+  R_{t+1}^{1-\gamma }=4k_{t}^{\gamma }R_{t}^{1+\gamma }
+\end{equation*}
+
+
+\item Describe stationary competitive equilibria in $(k_{t},R_{t})$ space
+and investigate their stability. (12.5 points)
+
+\textit{Answer:}
+
+Dynamics of the model is characterised by a two-dimensional system of
+first order difference equations:
+
+\begin{eqnarray*}
+  k_{t+1}&=&R_tk_t\\
+  R_{t+1}&=&4^\frac{1}{{1-\gamma}}k_{t}^\frac{\gamma}{1-\gamma}R_{t}^\frac{1+\gamma}{1-\gamma}
+\end{eqnarray*}
+
+or
+
+\begin{equation*}
+  \begin{pmatrix}
+    k_{t+1}\\
+    R_{t+1}
+  \end{pmatrix}
+= g(  \begin{pmatrix}
+    k_{t}\\
+    R_{t}
+  \end{pmatrix})
+\end{equation*}
+
+In steady state $R$ and $k$ solve
+\begin{gather*}
+  k=Rk\\
+  R^{1-\gamma }=4k^{\gamma}R^{1+\gamma}
+\end{gather*}
+
+There are two solutions: $(k,R)=(0,0)$ and $(k,R)=(4^{-\frac{1}{\gamma}}, 1)$.
+
+To characterize stability of steady states we need matrix of first derivatives
+\begin{equation*}
+  Dg(k_t,R_t)=
+  \begin{bmatrix}
+    g_{11} & g_{12}\\
+    g_{21}&g_{22}
+  \end{bmatrix}=
+  \begin{bmatrix}
+    R_t & k_t\\
+    4^\frac{1}{{1-\gamma}}k_{t}^\frac{\gamma}{1-\gamma}R_{t}^\frac{1+\gamma}{1-\gamma} \frac{\gamma}{1-\gamma}k_t^{-1} &
+    4^\frac{1}{{1-\gamma}}k_{t}^\frac{\gamma}{1-\gamma}R_{t}^\frac{1+\gamma}{1-\gamma} \frac{1+\gamma}{1-\gamma}R_t^{-1}
+  \end{bmatrix}
+\end{equation*}
+
+This is not well defined in $(0,0)$, so we can't characterize
+stability of the trivial steady state. We will focus on the second
+steady state, $(k,R)=(4^{-\frac{1}{\gamma}}, 1)$.
+
+\begin{equation*}
+  Dg(k,R)=
+  \begin{bmatrix}
+    1 & 4^{-\frac{1}{\gamma}}\\
+    \frac{\gamma}{1-\gamma}4^{\frac{1}{\gamma}}&\frac{1+\gamma}{1-\gamma}
+  \end{bmatrix}
+\end{equation*}
+
+Eigenvalues $\lambda$ of this matrix solve characteristic equation
+$p(\lambda)\equiv\lambda^2-T\lambda+D=0$, where
+\begin{eqnarray*}
+  T&=&g_{11}+g_{22}=\frac{2}{1-\gamma}\\
+  D&=&g_{11}g_{22}-g_{21}g_{12}=\frac{1}{1-\gamma}
+\end{eqnarray*}
+
+Discriminant $\mathcal{D}=T^2-4D=\frac{4\gamma}{(1-\gamma)^2}>0$, so
+  there are 2 different real eigenvalues.
+
+  \begin{equation*}
+    \lambda=\frac{\frac{2}{1-\gamma}\pm\sqrt{\frac{4\gamma}{(1-\gamma)^2}}}{2}=
+    \frac{1\pm\sqrt{\gamma}}{1-\gamma}=\frac{1}{1\pm\sqrt{\gamma}}
+  \end{equation*}
+
+
+  So the two roots of the equation are such that $0<\lambda_1=\frac{1}{1+\sqrt{\gamma}}<1$ and
+  $\lambda_2=\frac{1}{1-\sqrt{\gamma}}>1$. Steady state is stable, and the system converges
+  along a saddle path.
+
+\item Suppose that the economy starts in a non-trivial steady
+  state. Using a phase diagram, describe the dynamics of
+  $(k_{t},R_{t})$ after an unexpected negative shock to the capital
+  stock (i.e. part of the capital accumulated by the young cohort is
+  destroyed when they become old). Further, what happens to wages,
+  labor supply, and consumption over time in response to the shock?
+  (17.5 points)
+
+\textit{Answer:}
+
+\begin{eqnarray*}
+  k_{t+1}&=&R_tk_t\\
+  R_{t+1}&=&4^\frac{1}{{1-\gamma}}k_{t}^\frac{\gamma}{1-\gamma}R_{t}^\frac{1+\gamma}{1-\gamma}
+\end{eqnarray*}
+
+\begin{equation*}
+k=const:\quad R_t=1\\
+\end{equation*}
+
+$k_t$ increases if $R_t>1$ and decreases if $R_t<1$.
+
+\begin{equation*}
+R=const:\quad R=4^{-\frac{1}{2\gamma}}k^{-\frac{1}{2}}
+\end{equation*}
+
+Rewrite the second difference equation as
+\begin{equation*}
+  \left(\frac{R_{t+1}}{R_t}\right)^{1+\gamma}=4k_t^\gamma R_{t+1}^{2\gamma}
+\end{equation*}
+
+Above the $R=const$ line $k$ is large and $R$ is large, so
+$\frac{R_{t+1}}{R_t}>0$ and $R_t$ increases, below the line -
+decreases.
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{phase}
+  \end{center}
+  \caption{Phase diagram.}
+\end{figure}
+
+If capital drops below steady state level, $R$ will immediatelly jump
+up to the saddle path. Over time, $k$ will grow and $R$ will decline
+back to the steady state.
+
+Other variables of the model can be expressed as functions of the
+state vector $(k_t,R_t)$:
+
+\begin{align*}
+  n_t&=4R_t^2k_t\\
+  w_t&=\frac{1}{4R_t}\\
+  y_t&=k_{t}^{1/2}n_{t}^{1/2}=2R_tk_t\\
+  c_t^{t-1}&=R_tk_t
+\end{align*}
+
+The first two equations follow from firm's FOCs, and the last one from
+household budget constraint. Clearly, on impact wage $w_0$ will
+fall. Change in other variables depends on relative changes in $k$ and
+$R$. Effects can be either computed using numerical methods, or
+evaluated with log-linear approximation around steady state.
+
+First-order Taylor approximation of the system of difference equations is
+\begin{equation*}
+  \begin{pmatrix}
+    k_{t+1}-k\\
+    R_{t+1}-R
+  \end{pmatrix}
+= Dg(k,R)  \begin{pmatrix}
+    k_{t}-k\\
+    R_{t}-R
+  \end{pmatrix}
+\end{equation*}
+
+Saddle path can be found as an eigenvector $\mathbf{v}$ that
+corresponds to eigenvalue $0<\lambda_1<1$. $\mathbf{v}$ solves
+$(Dg(k,R)-I\lambda_1)\mathbf{v}=0$. Normalize first element of
+$\mathbf{v}$ to $v_1=1$, so that $\mathbf{v}=(1,v_2)$.
+
+\begin{equation*}
+    \begin{bmatrix}
+    1-\frac{1}{1+\sqrt{\gamma}}& 4^{-\frac{1}{\gamma}}\\
+    \frac{\gamma}{1-\gamma}4^{\frac{1}{\gamma}}&\frac{1+\gamma}{1-\gamma}-\frac{1}{1+\sqrt{\gamma}}
+  \end{bmatrix}
+  \begin{pmatrix}
+    1\\
+    v_2
+  \end{pmatrix}=
+\begin{pmatrix}
+    0\\
+    0
+  \end{pmatrix}
+\end{equation*}
+
+\begin{equation*}
+  \begin{cases}
+    \frac{\sqrt{\gamma}}{1+\sqrt{\gamma}}+4^{-\frac{1}{\gamma}}v_2=0\\
+    \frac{\gamma}{1-\gamma}4^{\frac{1}{\gamma}}+\frac{\sqrt{\gamma}}{1-\sqrt{\gamma}}v_2=0
+  \end{cases}
+\end{equation*}
+
+Two equations are identical, solving either one yields
+$v_2=-\frac{\sqrt{\gamma}}{1+\sqrt{\gamma}}4^{\frac{1}{\gamma}}$.
+
+$k_0-k$ is the initial shock to capital. Then $R_0$ must be on the
+saddle path. With linear approximation, slope of the saddle path is
+equal to the slope of the eigenvector, so
+\begin{equation*}
+  \frac{R_0-R}{k_0-k}=\frac{v_2}{v_1}=-\frac{\sqrt{\gamma}}{1+\sqrt{\gamma}}4^{\frac{1}{\gamma}}  
+\end{equation*}
+
+Let hats denote deviations from steady state, e.g.
+$\hat{R}_t=\frac{R_t-R}{R}$. Then
+
+\begin{equation*}
+  \hat{R}_0=-\frac{\sqrt{\gamma}}{1+\sqrt{\gamma}}\hat{k}_0
+\end{equation*}
+
+Log-linearize the four equations for other variables of the model:
+\begin{align*}
+  \hat{n}_t&=2\hat{R}_t+\hat{k}_t\\
+  \hat{w}_t&=-\hat{R}_t\\
+  \hat{y}_t&=\hat{R}_t+\hat{k}_t\\
+  \hat{c}_t^{t-1}&=\hat{R}_t+\hat{k}_t
+\end{align*}
+
+Plug in expression for $\hat{R}_0$, and with negative shock
+$\hat{k}_0<0$:
+\begin{align*}
+  \hat{n}_0&=\frac{1-\sqrt{\gamma}}{1+\sqrt{\gamma}}\hat{k}_0<0\\
+  \hat{w}_0&=\frac{\sqrt{\gamma}}{1+\sqrt{\gamma}}\hat{k}_0<0\\
+  \hat{y}_0&=\frac{1}{1+\sqrt{\gamma}}\hat{k}_0<0\\
+  \hat{c}_0^{-1}&=\frac{1}{1+\sqrt{\gamma}}\hat{k}_0<0
+\end{align*}
+
+Labor, wages, output and consumption all decrease below their steady
+state levels in response to a negative shock to capital, and then
+gradually converge back.
+
+\end{enumerate}
+
+\end{document}

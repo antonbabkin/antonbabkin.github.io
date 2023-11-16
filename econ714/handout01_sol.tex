@@ -1,0 +1,284 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{etoolbox}
+
+\newtoggle{sol}
+\settoggle{sol}{true}
+\newcommand{\sol}[1]{\iftoggle{sol}{{\color{blue} #1 }}{}}
+\newcommand{\R}{\mathbb{R}}
+
+
+\title{Econ 714: Handout 1 \iftoggle{sol}{- Solution}{}}
+\author{Anton Babkin}
+
+\begin{document}
+
+{\Large Econ 714: Handout 1 \sol{- Solution}\footnote{By Anton Babkin. This version: \today.}}
+
+\section{Mortensen-Pissarides model}
+
+Compared to Pissarides, job destruction rate is endogenous. Each job
+has productivity $px$, where $x$ is idiosyncratic. New $x$ arrives at
+Poisson rate $\lambda$, drawn from distribution $G$ on
+$[0,1]$. Initial draw is $x=1$.
+
+Value of a job is now $J(x)$. If $J(x) \ge 0)$ job kept, if $J(x)<0$
+destroyed. Reservation productivity $R$ such that $J(R)=0$.
+
+Job destruction rate: $\lambda G(R)(1-u)$. Job creation:
+$m(u,v)=\theta q(\theta)u$, where $\theta=v/u$ is market tightness. Unemployment flow: 
+$\dot{u} = \lambda G(R)(1-u) - \theta q(\theta)u$
+
+Steady state (Beveridge curve):
+
+\begin{equation}
+  \label{eq:bc}
+  \tag{BC}
+  u = \frac{\lambda G(R)}{\lambda G(R)+\theta q(\theta)}
+\end{equation}
+
+Value functions for the firm:
+
+\begin{equation}
+  \label{eq:fv}
+  \tag{FV}
+  rV=-pc+q(\theta)(J(1)-V)
+\end{equation}
+
+\begin{equation}
+  \label{eq:fj}
+  \tag{FJ}
+  rJ(x)=px-w(x)+\lambda\left[\int_R^1J(s)dG(s)-J(x)\right]
+\end{equation}
+
+Value functions for the worker:
+
+\begin{equation}
+  \label{eq:wu}
+  \tag{WU}
+  rU=z + \theta q(\theta)(W(1)-U)
+\end{equation}
+
+\begin{equation}
+  \label{eq:ww}
+  \tag{WW}
+  rW(x)=w(x)+\lambda\left[\int_R^1W(s)dG(s)+G(R)U-W(x)\right]
+\end{equation}
+
+Worker's share of surplus (Nash bargaining):
+
+\begin{equation}
+  \label{eq:nb}
+  \tag{NB}
+  W(x)-U=\beta[W(x)-U+J(x)-V]
+\end{equation}
+
+Zero profit: $V=0$.
+
+Exogenous variables: $\lambda,G,m,p,c,z,r,\beta$.
+
+Endogenous variables: $R,\theta,u,v,w,V,J,U,W$.
+
+\subsection{Solving the model}
+
+\begin{enumerate}
+\item Wage equation:
+  \begin{equation}
+    \label{eq:w}
+    \tag{w}
+    w(x)=z(1-\beta)+\beta p(x+c\theta)
+  \end{equation}
+
+\sol{
+
+  From \eqref{eq:fv} and $V=0$:
+  \begin{equation*}
+    J(1)=\frac{pc}{q(\theta)}
+  \end{equation*}
+
+  Substitute into \eqref{eq:nb} with $x=1$:
+  \begin{equation*}
+    W(1)-U=\frac{\beta}{1-\beta} \frac{pc}{q(\theta)}
+  \end{equation*}
+
+  Plug into \eqref{eq:wu}:
+  \begin{equation*}
+    rU=z+\theta \frac{\beta}{1-\beta} pc
+  \end{equation*}
+
+  Multiply \eqref{eq:ww} by $1-\beta$ and subtract \eqref{eq:fj}
+  multiplied by $\beta$. Substitute out $W(x)$ and $J(x)$ using
+  \eqref{eq:nb} and get:
+  \begin{equation*}
+    w(x)=\beta px + r(1-\beta)U
+  \end{equation*}
+
+  Use previously found expression for $rU$ to derive \eqref{eq:w}.
+
+}
+
+\item Job creation:
+  \begin{equation}
+    \label{eq:jc}
+    \tag{JC}
+    (1-\beta)\frac{1-R}{r+\lambda}=\frac{c}{q(\theta)}
+  \end{equation}
+
+\sol{
+
+  Plug \eqref{eq:w} into \eqref{eq:fj}:
+  \begin{equation}
+    \label{eq:wjf}
+    (r+\lambda) J(x)=(1-\beta)(px-z)-\beta pc\theta+\lambda\int_R^1J(s)dG(s)
+  \end{equation}
+  
+  Evaluate \eqref{eq:wjf} at $x=R$ and subtract resulting equation
+  from \eqref{eq:wjf}, using $J(R)=0$:
+  \begin{equation}
+    \label{eq:jx}
+    (r+\lambda) J(x)=p(1-\beta)(x-R)
+  \end{equation}
+
+  Evaluate at $x=1$ using $J(1)=\frac{pc}{q(\theta)}$ and rearrange to
+  get \eqref{eq:jc}.
+
+}
+
+
+\item Job destruction:
+  \begin{equation}
+    \label{eq:jd}
+    \tag{JD}
+    \frac{\beta}{1-\beta}c\theta = R-z/p+\frac{\lambda}{r+\lambda}\int_R^1(s-R)dG(s)
+  \end{equation}
+
+\sol{
+
+  Use \eqref{eq:jx} to substitute $J(s)$ under integral in \eqref{eq:wjf}:
+  \begin{equation*}
+    (r+\lambda) J(x)=(1-\beta)(px-z)-\beta pc\theta+\frac{\lambda}{r+\lambda}p(1-\beta)\int_R^1(s-R)dG(s)
+  \end{equation*}
+
+  Evaluate at $x=R$ and divide by $p(1-\beta)$ to get \eqref{eq:jd}.
+
+}
+
+\item Solve \eqref{eq:jc} and \eqref{eq:jd} for $R$ and $\theta$, then
+  use \eqref{eq:bc} to solve for $u$ and $v$.
+
+\sol{
+
+  We can't derive closed form solutions, but can argue that solution
+  is unique since \eqref{eq:jc} is decreasing and \eqref{eq:jd} is
+  increasing in $(\theta,R)$ space.
+
+  Graphs can be used to do comparative statics. For example, if $p$
+  increases, \eqref{eq:jd} curve shifts to the right, so $R$
+  decreases, $\theta$ increases. From \eqref{eq:bc}, $u$ is decreasing
+  and from definition of $\theta$, $v$ must increase.
+
+}
+
+
+\end{enumerate}
+
+
+\section[]{Problem - McCall model\footnote{August 2012 macro prelim}}
+
+Consider a variation on the basic sequential search model in which there is wage
+growth.  Agents are risk neutral and seek to maximize:
+
+\begin{equation*}
+  E\sum_{t=0}^\infty\beta^ty_t
+\end{equation*}
+
+where $y_t$ is income in period $t$, which comes either from work or
+unemployment benefis, and $0< \beta<1$. Suppose that there are no
+separations and each unemployed worker is sure to receive an offer
+upon searching.  If the wage offer is $w$ in the first period, then
+the wage is $w_t = \phi^t w$ after $t$ periods on the job, where $\phi> 1$ and
+$\phi\beta< 1$.  The initial wage offer is drawn from a constant
+distribution $F(w)$. Unemployed workers earn a constant benefit of $z$.
+\begin{enumerate}
+\item Write down an unemployed worker's Bellman equation and
+  characterize his optimal decision strategy.
+
+\sol{
+
+Start with value of an employed worker with wage $w$:
+\begin{equation*}
+  W(w) = w + \beta\phi w + \beta^2\phi^2 w + ... = \frac{w}{1-\beta\phi}
+\end{equation*}
+
+Value of an unemployed:
+\begin{equation*}
+  U=z+\beta\int_0^\infty \max\{U,\frac{w}{1-\beta\phi}\}dF(w)
+\end{equation*}
+
+Optimal decision is to accept if $w>w_R$ and reject if $w<w_R$, where
+at $w_R$ worker is indifferent:
+$U=W(w_R)=\frac{w_R}{1-\beta\phi}$. Split integral in two parts:
+
+\begin{equation*}
+  \frac{w_R}{1-\beta\phi}=z+\beta\int_0^{w_R} \frac{w_R}{1-\beta\phi}dF(w) +
+\beta\int_{w_R}^\infty \frac{w}{1-\beta\phi}dF(w)
+\end{equation*}
+
+Add and subtract $\beta\int_{w_R}^\infty\frac{w_R}{1-\beta\phi}dF(w)$ to the RHS:
+
+\begin{equation*}
+  \frac{w_R}{1-\beta\phi}=z+\beta \frac{w_R}{1-\beta\phi} +
+\frac{\beta}{1-\beta\phi}\int_{w_R}^\infty (w-w_R)dF(w)
+\end{equation*}
+
+Rearrange and multiply by $(1-\beta\phi)$:
+
+\begin{equation}
+  \label{eq:mc}
+  (1-\beta)w_R-z(1-\beta\phi) = \int_{w_R}^\infty (w-w_R)dF(w)
+\end{equation}
+
+We can't solve it explicitly, but can characterise solution by
+plotting LHS and RHS as functions of $w_R$. LHS is clearly increasing. To show that RHS is decreasing in $w_R$, we need a negative derivative.
+
+We will use the Leibniz's rule:
+
+\begin{equation*}
+  \frac{\mathrm{d}}{\mathrm{d}t} \left (\int_{a(t)}^{b(t)} f(x,t)\,\mathrm{d}x \right )= \int_{a(t)}^{b(t)}\frac{ \partial f}{ \partial t}\,\mathrm{d}x \,+\, f\big(b(t),t\big)\cdot b'(t) \,-\, f\big(a(t),t \big)\cdot a'(t)
+\end{equation*}
+
+Applying to the RHS yields ($w_R$ plays the role of $t$, $dF(w)\equiv f(w)dw$):
+
+\begin{gather*}
+  -\int_{w_R}^\infty dF(w) + \lim_{b\to\infty} [(b-w_R)f(b)\cdot 0] - (w_R - w_R) \cdot 1 =
+  -(1-F(w_R)) < 0
+\end{gather*}
+
+
+
+}
+
+
+\item Suppose that there are two economies $i = 1, 2$ that differ in
+  their wage growth rates, with $\phi_1 > \phi_2$ (both $\phi_i$ still
+  satisfy $1 < \phi_i < 1/\beta$). How do the decision strategies
+  differ across economies?
+
+\sol{
+
+  From \eqref{eq:mc} it is clear that increase in $\phi$ shifts the
+  upward sloping LHS curve up, so solution $w_R$ must be lower,
+  i.e. $w_{R1} < w_{R2}$.
+
+  Intuitively, if wage grows faster once employed, it is better to
+  start working earlier, so reservation wage is lower.
+
+}
+
+\end{enumerate}
+
+\end{document}
+

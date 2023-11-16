@@ -1,0 +1,398 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{enumerate}
+%\usepackage[margin=1in]{geometry}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{Econ 714: Problem Set 1 - Solution}
+\author{Anton Babkin}
+
+\begin{document}
+
+{\Large Econ 714: Problem Set 1 - Solution\footnote{By Anton Babkin. \today.}}
+
+
+\section{}
+
+\begin{enumerate}[(a)]
+\item From lecture notes, we have:
+  \begin{equation*}
+    w_R-z=\frac{\beta p}{1-\beta(1-s)}\int_{w_R}^\infty(w'-w_R)dF(w')
+  \end{equation*}
+
+Add and subtract $\frac{\beta p}{1-\beta(1-s)}\left(
+\int_0^{w_R}w'dF(w') + w_R\int_0^{w_R}dF(w')\right)$ on the right hand-side. After collecting terms, we get:
+
+  \begin{align*}
+    w_R-z&=\frac{\beta p}{1-\beta(1-s)}\left(\int_0^\infty w'dF(w') - w_R \int_0^\infty dF(w') - \int_0^{w_R} (w'-w_R)dF(w')\right)\\
+         &=\frac{\beta p}{1-\beta(1-s)}\left(\E w-w_R-\int_0^{w_R} (w'-w_R)dF(w')\right)
+  \end{align*}
+
+  where $\E w$ is the expectation of wage under the distribution
+  $F(w')$. Multiply by $(1-\beta(1-s))$ both sides and rearrange terms. Finally, by integrating the last integral by parts, we get:
+
+\begin{equation}
+(1-\beta(1-s)+\beta p)w_R - (1-\beta(1-s))z = \beta p Ew + \beta p \int_{0}^{w_R}F(w')dw'
+\end{equation}
+
+\item If $G$ be a mean preserving spread of $F$, then $\int_{0}^{b}G(w')dw' \geq \int_{0}^{b}F(w')dw'$. Let $h_f(w)=\int_{0}^{w}F(w')dw'$ and  $h_g(w)=\int_{0}^{w}G(w')dw'$. Then, for any $w$, $h_g(w) \geq h_f(w)$ and so reservation wage is (weakly) higher $w_{R,g} \geq w_{R,f}$.\footnote{Let $h(s)=\int_{0}^{s}F(p)dp$, then $h'(s)=F(s)>0$ and $h''(s)=f(s)>0$ so the function $h(s)$ is convex in $s$. See Ljungqvist and Sargent textbook for more detail.}
+
+
+\item From the lecture notes, we have:
+
+\begin{equation}
+w_R - z = \frac{\beta p}{1-\beta(1-s)}\int_{w_R}^{\infty}(w'-w_R)dF(w) \nonumber
+\end{equation}
+
+The term $\int_{w_R}^{\infty}(w'-w_R)dF(w)$ is decreasing in $w$. Then, if we re-write this as:
+
+\begin{equation}
+\frac{w_R - z}{\int_{w_R}^{\infty}(w'-w_R)dF(w)}=\frac{\beta p}{1-\beta(1-s)} \nonumber
+\end{equation}
+
+Then, the left-hand side will be increasing in $w_R$. If $p$ falls, the reservation wage falls as well. 
+
+Steady-state unemployment rate is determined by:
+
+\begin{eqnarray}
+up(1-F(w_R)) &=& s(1-u) \nonumber\\
+u &=& \frac{{s}}{p(1-F(w_R))+s}
+\end{eqnarray}
+
+We cannot really say what will happen to steady-state unemployment rate if $p$ falls without imposing some conditions on $F(w)$.
+
+
+\end{enumerate}
+
+
+\section{}
+
+First notice that at the highest level productivity $x=1$ there is no
+incentive to search for a new job, because it won't yield a higher
+wage. So when agent gets a new job, his value is $W^n(1)$.
+
+Value of the unemployed is almost like in a standard
+Mortensen-Pissarides model:
+\begin{equation*}
+  rU=z+f(W^n(1)-U)
+\end{equation*}
+
+Employed worker will not switch his search decision unless a
+productivity shock arrives. Once the shock hits, the job is either
+destroyed or continues with a new level of productivity - this is when
+worker can decide to switch between searching and not.
+
+Value of the non-searching employed:
+\begin{equation*}
+  rW^n(x)=w(x)+\lambda\left[\int_0^RUdG(x') + \int_R^1\max\{W^n(x'),W^s(x')\}dG(x') - W^n(x)\right]
+\end{equation*}\\
+\\
+\\
+(c.) 
+
+Value of the searching employed:
+\begin{align*}
+  rW^s(x)= & w(x)-\sigma+f\left[W^n(1)-W^s(x)\right] \\
+           & +\lambda\left[\int_0^RUdG(x') + \int_R^1\max\{W^n(x'),W^s(x')\}dG(x') - W^s(x)\right]
+\end{align*}
+
+\section{}
+
+\begin{enumerate}[(a)]
+  \item The social planner's problem is
+    \begin{gather*}
+      \max_{\{c_t^1,c_t^2\}_{t=0}^\infty}\sum_{t=0}^\infty\beta^t\left[\lambda u(c_t^1)+(1-\lambda)u(c_t^2)\right]\\
+      \text{s.t. } c_t^1+c_t^2=e_t^1+e_t^2\quad\forall t
+    \end{gather*}
+    where we know that $e_t^1=1$ and $e_t^2=0$ for $0\le t<21$, and $e_t^1=0$ and $e_t^2=1$ for $t\ge 21$. Hence the resource constraint can be rewritten as
+    \begin{equation}
+      \label{eq:res}
+      c_t^1+c_t^2=1
+    \end{equation}
+    Attaching the Lagrangian multipliers $\{\mu_t\}$ to the constraints, the FOC's are
+    \begin{align*}
+      c_t^1  : &\, \lambda u'(c_t^1)=\mu_t\\
+      c_t^2  : &\, (1-\lambda)u'(c_t^2)=\mu_t
+    \end{align*}
+    Equating the above we have
+    \begin{equation}
+      \label{eq:foc1}
+      \frac{u'(c_t^1)}{u'(c_t^2)}=\frac{1-\lambda}{\lambda}
+    \end{equation}
+    and using the resource constraint we have
+    \begin{equation}
+      \label{eq:foc2}
+      \frac{u'(c_t^1)}{u'(1-c_t^1)}=\frac{1-\lambda}{\lambda}
+    \end{equation}
+    Notice that from \eqref{eq:res} we have, for $t\ne t'$, that if
+    $c_t^1\ge c_{t'}^2$, then it must be that $c_t^2<c_{t'}^2$. But
+    then
+    $\frac{u'(c_t^1)}{u'(c_t^2)}<\frac{u'(c_{t'}^1)}{u'(c_{t'}^2)}$,
+    which vioates \eqref{eq:foc1}, so it must be that
+    \begin{gather*}
+      c_t^1=c^1\\
+      c_t^2=c^2
+    \end{gather*}
+    The value of $c_t^1$ (and hence of $c^2$) is given by
+    \eqref{eq:foc2} and depends on $\lambda$ and the utility function.
+    
+
+  \item A competitive equilibrium is an allocation
+    $\{c_t^1,c_t^2\}_{t=0}^\infty$ and a set of prices
+    $\{p_t\}_{t=0}^\infty$ such that:
+    \begin{itemize}
+    \item Agent $i\in\{1,2\}$ maximizes utility:
+      \begin{gather}
+        \max_{\{c_t^i\}_{t=0}^\infty}\sum_{t=0}^\infty\beta^tu(c_t^i)\nonumber\\
+        \text{s.t. }\sum_{t=0}^\infty p_tc_t^i=\sum_{t=0}^\infty p_te_t^i\label{eq:budget}
+      \end{gather}
+    \item Markets clear:
+      \begin{equation}
+        \label{eq:mc}
+        c_t^1+c_t^2=1
+      \end{equation}
+    \end{itemize}
+
+  \item Attaching the Lagrangian multiplier $\kappa_i$ to agent $i$'s budget constraint, the FOC of this problem is
+    \begin{equation}
+      \label{eq:foc3}
+      c_t^i :\, \beta^tu'(c_t^i)=\kappa^ip_t
+    \end{equation}
+    Normalize by setting $p_0=1$, so
+    \begin{equation*}
+      \kappa^i=u'(c_0^i)
+    \end{equation*}
+    Combining the FOC's for the two agents we have
+    \begin{equation}
+      \label{eq:foc4}
+      \frac{u'(c_t^1)}{u'(c_t^2)}=\frac{u'(c_0^1)}{u'(c_0^2)}\equiv\eta
+    \end{equation}
+    Notice that from \eqref{eq:mc} we have that if
+    $c_t^1\ge c_{t'}^2$, then it must be that $c_t^2<c_{t'}^2$. But
+    then
+    $\frac{u'(c_t^1)}{u'(c_t^2)}<\frac{u'(c_{t'}^1)}{u'(c_{t'}^2)}$,
+    which vioates \eqref{eq:foc4}, so it must be that
+    \begin{equation}
+      \label{eq:cons}
+      \begin{aligned}
+        c_t^1=c^1\\
+        c_t^2=c^2
+      \end{aligned}
+    \end{equation}
+    Using this in \eqref{eq:foc3} for agent $i$ for periods $0$ and $t$ we have
+    \begin{equation}
+      \label{eq:p}
+      p_t=\beta^t
+    \end{equation}
+    Using \eqref{eq:cons} and \eqref{eq:p} in \eqref{eq:budget} we have
+      \begin{gather*}
+        \sum_{t=0}^\infty \beta^tc^1=\sum_{t=0}^{20} \beta^t
+      \end{gather*}
+      which implies $c^1=1-\beta^{21}$, and using \eqref{eq:mc} we
+      have $c^2=\beta^{21}$.
+
+      Thus, the competitive equilibrium is
+      $\{c_t^1,c_t^2\}_{t=0}^\infty$ and $\{p_t\}_{t=0}^\infty$, where
+      \begin{align*}
+        c_t^1=1-\beta^{21}\quad\forall t\\
+        c_t^2=\beta^{21}\quad\forall t\\
+        p_t=\beta^t\quad\forall t
+      \end{align*}
+
+      Clearly, this competitive equilibrium is Pareto optimal for the
+      appropriate choice of $\lambda$ (1st welfare theorem), while the
+      Pareto optimum is a competitive equilibrium with transfers (2nd
+      welfare theorem).
+
+    \item The price of the claim to consumer 1's endowment process
+      must be equal to the price of purchasing an equivalent sequence
+      of consumption $c_t^1=1$ for $t=0,1,...,20$ and $c_t^1=0$ for
+      $t>20$. The same is true for consumer 2's endowment process and
+      for the aggregate endowment process. Thus:
+      \begin{gather*}
+        p_e^1=\sum_{t=0}^{20}p_t=\sum_{t=0}^{20}\beta^t=\frac{1-\beta^{21}}{1-\beta}\\
+        p_e^2=\sum_{t=21}^\infty p_t=\sum_{t=21}^\infty \beta^t=\frac{\beta^{21}}{1-\beta}\\
+        p_e^1=p_e^1+p_e^2=\sum_{t=1}^\infty p_t=\frac{1}{1-\beta}\\
+      \end{gather*}
+
+
+\end{enumerate}
+
+
+
+\section{}
+
+\begin{enumerate}[(a)]
+\item Household problem, $i=1,2$:
+
+  \begin{gather*}
+    \max_{\{c_t^i(a^t,s^t)\}_{t=0}^\infty}
+    \sum_{t=0}^\infty
+    \sum_{(a^t,s^t)}
+    \beta^t\log(c_t^i(a^t,s^t))Pr(a^t,s^t)\\
+    \text{s.t. } \sum_{t=0}^\infty \sum_{(a^t,s^t)} q_t^0(a^t,s^t)c_t^i(a^t,s^t) = 
+    \sum_{t=0}^\infty \sum_{(a^t,s^t)} q_t^0(a^t,s^t)e_t^i(a_t,s_t)\\
+    c_t^i(a^t,s^t)\ge 0\\
+    e_t^1(a_t,s_t)=a_t+s_t\\
+    e_t^2(a^t,s^t)=a_t+1-s_t
+  \end{gather*}
+
+\item The Arrow-Debreu competitive equilibrium is the sequence of
+  allocations $\{\{c_t^i(a^t,s^t)\}_{t=0}^\infty\}_{i=1}^2$ and prices
+  $\{q_t^0(a^t,s^t)\}_{t=0}^\infty$ that solves household problem and
+  satisfies market clearing condition:
+
+  \begin{equation*}
+    c_t^1(a^t,s^t)+c_t^2(a^t,s^t)=e_t^1(a_t,s_t)+e_t^2(a_t,s_t)
+  \end{equation*}
+
+\item Note that with the utility function being $\log(c)$, the Inada
+  conditions are satisfied, the solution is interior and budget
+  constraint holds with equality, and we can drop the nonnegativity
+  constraint. By Negishi algorithm, consider the social planner's
+  problem with the Pareto weights $(w^1, w^2)$ and $w^1+w^2=1$:
+
+\begin{gather*}
+    \max_{\{\{c_t^i(a^t,s^t)\}_{t=0}^\infty\}_{i=1}^2}
+    \sum_{i=1}^2 w^i
+    \sum_{t=0}^\infty
+    \sum_{(a^t,s^t)}
+    \beta^t\log(c_t^i(a^t,s^t))Pr(a^t,s^t)\\
+    \text{s.t. } c_t^1(a^t,s^t)+c_t^2(a^t,s^t)=e_t^1(a_t,s_t)+e_t^2(a_t,s_t)
+  \end{gather*}
+
+  Attaching the Lagrangian multiplier $\lambda_t$ to the budget
+  constraint, FOC w.r.t. $c_t^i(a^t,s^t)$ is:
+\begin{equation*}
+  \frac{w^i\beta^tPr(a^t,s^t)}{c_t^i(a^t,s^t)}=\lambda_t
+\end{equation*}
+
+Divide two conditions for $i=1,2$:
+\begin{equation*}
+  \frac{w^1}{c_t^1(a^t,s^t)}=  \frac{w^2}{c_t^2(a^t,s^t)}
+\end{equation*}
+
+Use this together with
+$e_t(a_t,s_t)=e_t^1(a_t,s_t)+e_t^2(a_t,s_t) = 2a_t+1$ and the
+feasibility constraint to obtain optimal consumption allocations
+$c_t^i(a^t,s^t)=w^ie_t(a_t,s_t)$.
+
+Now turn back to household problem. Attaching the Lagrangian
+multiplier $\mu^i$ to the budget constraint of household $i$, obtain
+FOC:
+
+\begin{equation*}
+  \frac{\beta^tPr(a^t,s^t)}{c_t^i(a^t,s^t)}=\mu^iq_t^0(a^t,s^t)
+\end{equation*}
+
+Normalizing the price at date $t=0$ and state $(a_0,s_0)=(0,0)$:
+$q_0^0(0,0)=\overline{\pi}_a\overline{\pi}_b$, evaluate the above
+expression at state $(a_0,s_0)=(0,0)$, and note that $e_0(0,0)=1$, we
+can solve for the Lagrangian multiplier:
+\begin{equation*}
+  \mu^i=\frac{1}{c_0^i(0,0)}=\frac{1}{w^ie_0(0,0)}=\frac{1}{w^i}
+\end{equation*}
+
+Substitute into the first-order condition to obtain the AD securities
+price as:
+\begin{equation*}
+  q_t^0(a^t,s^t)=\frac{\beta^tPr(a^t,s^t)}{\mu^ic_t^i(a^t,s^t)}
+  =\frac{w^i\beta^tPr(a^t,s^t)}{w^ie_t(a_t,s_t)}
+  =\frac{\beta^tPr(a^t,s^t)}{2a_t+1}
+\end{equation*}
+
+Withe price and optimal consumption allocation, substitute into budget
+constraint to solve for pareto weight for individual $i=1$ and that
+$w^2=1-w^1$:
+\begin{align*}
+  \sum_{t=0}^\infty \sum_{(a^t,s^t)} \frac{\beta^tPr(a^t,s^t)}{e_t(a_t,s_t)}w^1e_t(a_t,s_t) & =
+    \sum_{t=0}^\infty \sum_{(a^t,s^t)} \frac{\beta^tPr(a^t,s^t)}{e_t(a_t,s_t)}e_t^i(a_t,s_t)\\
+w^1\sum_{t=0}^\infty \beta^t\sum_{(a^t,s^t)} Pr(a^t,s^t) & =
+    \sum_{t=0}^\infty \beta^t\sum_{(a^t,s^t)} Pr(a^t,s^t)\frac{a_t+s_t}{2a_t+1}\\
+w^1\sum_{t=0}^\infty \beta^t& =
+ \sum_{t=0}^\infty \beta^t\sum_{(a_t,s_t)} Pr(a_t,s_t)\frac{a_t+s_t}{2a_t+1}\\
+w^1\sum_{t=0}^\infty \beta^t& =
+    \left(\frac{1}{3}\overline{\pi}_a-\frac{1}{3}\overline{\pi}_s-\frac{2}{3}\overline{\pi}_a\overline{\pi}_s+\frac{2}{3}\right)\sum_{t=0}^\infty \beta^t\\
+  w^1& =\frac{1}{3}\overline{\pi}_a-\frac{1}{3}\overline{\pi}_s-\frac{2}{3}\overline{\pi}_a\overline{\pi}_s+\frac{2}{3}\\
+  w^2&=\frac{1}{3}\overline{\pi}_a-\frac{1}{3}\overline{\pi}_s-\frac{2}{3}\overline{\pi}_a\overline{\pi}_s-\frac{1}{3}
+\end{align*}
+
+To understand how $\sum_{(a^t,s^t)} Pr(a^t,s^t)\frac{a_t+s_t}{2a_t+1}$
+turns into $\sum_{(a_t,s_t)} Pr(a_t,s_t)\frac{a_t+s_t}{2a_t+1}$ in the
+second equation, consider a simpler case with a single two-state
+Markov random variable $z_t\in\{0,1\}$. Let stationary distribution be
+$(\bar{p}_0,\bar{p}_1)$, and transition probability from state $i$ to
+state $j$ be $p_{ij}$.
+
+For $t=0$, $Pr(z_0=0)=\bar{p}_0$ and $Pr(z_0=1)=\bar{p}_1$. At $t=1$,
+probability of history $Pr(z^t)=Pr(z_0,z_1)=Pr(z_0)Pr(z_1|z_0)$. For
+example, $Pr(0,0)=\bar{p}_0p_{00}$. Now, group summation terms over
+histories at $t=1$:
+\begin{align*}
+  [Pr(0,0)+Pr(1,0)] &+ [Pr(0,1)+Pr(1,1)]\\
+  [\bar{p}_0p_{00}+\bar{p}_1p_{10}]&+[\bar{p}_0p_{01}+\bar{p}_1p_{11}]
+\end{align*}
+But by the definition of stationary distribution,
+$\bar{p}_0p_{00}+\bar{p}_1p_{10} = \bar{p}_0$ and
+$\bar{p}_0p_{01}+\bar{p}_1p_{11}=\bar{p}_1$, so the sum simplifies to
+$\bar{p}_0+\bar{p}_1$. Same reasoning applies $\forall t$.
+
+Now, using the values for $w^i$, can write down AD equilibrium:
+\begin{align*}
+  c_t^1(a^t,s^t) &= \left(\frac{1}{3}\overline{\pi}_a-\frac{1}{3}\overline{\pi}_s-\frac{2}{3}\overline{\pi}_a\overline{\pi}_s+\frac{2}{3}\right)(2a_t+1)\\
+  c_t^2(a^t,s^t) &= \left(\frac{1}{3}\overline{\pi}_a-\frac{1}{3}\overline{\pi}_s-\frac{2}{3}\overline{\pi}_a\overline{\pi}_s-\frac{1}{3}\right)(2a_t+1)\\
+q_t^0(a^t,s^t) &=\frac{\beta^tPr(a^t,s^t)}{2a_t+1}
+\end{align*}
+
+As always under complete markets, consumption does not depend on
+idiosyncratic risk $s_t$. Consumers get a constant fraction of
+aggregate endowment which only varies with $a_t$.
+
+\item Price of one-period contingent claims (Arrow securities) can be found as
+  \begin{gather*}
+    q_{t+1}^t(a^{t+1},s^{t+1})=\frac{q_{t+1}^0(a^{t+1},s^{t+1})}{q_t^0(a^t,s^t)}=\frac{\frac{\beta^{t+1}Pr(a^{t+1},s^{t+1})}{2a_{t+1}+1}}{\frac{\beta^tPr(a^t,s^t)}{2a_t+1}}\\
+    =\beta\frac{2a_{t}+1}{2a_{t+1}+1}Pr(a_{t+1},s_{t+1}|a_t,s_t)=\beta\frac{2a_{t}+1}{2a_{t+1}+1}Pr(a_{t+1}|a_t)Pr(s_{t+1}|s_t)
+  \end{gather*}
+
+  There are 16 prices in total, for 4 possible states at $t+1$ after
+  each of 4 possible states at $t$. With given parameters, prices are:
+  \begin{gather*}
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=0|a_t=0,s_t=0)=0.684\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=0|a_t=0,s_t=1)=0.152\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=0|a_t=1,s_t=0)=0.7695\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=0|a_t=1,s_t=1)=0.171\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=1|a_t=0,s_t=0)=0.076\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=1|a_t=0,s_t=1)=0.608\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=1|a_t=1,s_t=0)=0.0855\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=1|a_t=1,s_t=1)=0.681\\
+    q_{t+1}^t(a_{t+1}=1,s_{t+1}=0|a_t=0,s_t=0)=0.057\\
+    q_{t+1}^t(a_{t+1}=1,s_{t+1}=0|a_t=0,s_t=1)=0.0127\\
+    q_{t+1}^t(a_{t+1}=1,s_{t+1}=0|a_t=1,s_t=0)=0.5985\\
+    q_{t+1}^t(a_{t+1}=1,s_{t+1}=0|a_t=1,s_t=1)=0.133\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=0|a_t=0,s_t=0)=0.0063\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=0|a_t=0,s_t=1)=0.0507\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=0|a_t=1,s_t=0)=0.0665\\
+    q_{t+1}^t(a_{t+1}=0,s_{t+1}=0|a_t=1,s_t=1)=0.532\\
+  \end{gather*}
+
+\item The one-period ahead riskless claim to one unit of consumption
+  depends on the current state of the world, consumer must buy one
+  unit of Arrow securities contingent for each possible state of the
+  world in the next period. Hence, we have the following prices:
+  \begin{itemize}
+  \item If $(a_t,s_t)=(0,0)$, the price is $0.684+0.076+0.057+0.0063=0.8233$
+  \item If $(a_t,s_t)=(0,1)$, the price is $0.152+0.608+0.0127+0.0507=0.8233$
+  \item If $(a_t,s_t)=(1,0)$, the price is $0.7695+0.0855+0.5985+0.0665=1.52$
+  \item If $(a_t,s_t)=(1,1)$, the price is $0.171+0.684+0.133+0.532=1.52$
+  \end{itemize}
+
+\end{enumerate}
+
+
+
+\end{document}
